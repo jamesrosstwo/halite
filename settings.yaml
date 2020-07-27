@@ -1,0 +1,2 @@
+agent:
+  replay_memory_capacity: 20

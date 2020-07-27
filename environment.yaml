@@ -1,0 +1,6 @@
+name: connect-four
+dependencies:
+  - numpy
+  - matplotlib
+  - pillow
+  - pyyaml

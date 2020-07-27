@@ -2,14 +2,12 @@
 Team lime's halite bot
 
 ## Installation
-### Windows
-```batch
-git clone git@github.com:jamesrosstwo/halite.git
-cd halite
-pip install virtualenv
-virtualenv venv
-venv\Scripts\activate.bat
-pip install -r requirements.txt
+
+```bash
+git clone git@github.com:jamesrosstwo/connect-four.git
+cd connect-four
+conda env create --file environment.yaml
+conda activate connect-four
 ```
 
-### Unix
+[Add pytorch to your conda environment](https://pytorch.org/get-started/locally/)

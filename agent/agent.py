@@ -2,16 +2,9 @@
 
 # Imports helper functions
 from kaggle_environments.envs.halite.helpers import *
+from agent.ship import HaliteShip
 
-# Returns best direction to move from one position (fromPos) to another (toPos)
-# Example: If I'm at pos 0 and want to get to pos 55, which direction should I choose?
-def getDirTo(fromPos, toPos, size):
-    fromX, fromY = divmod(fromPos[0],size), divmod(fromPos[1],size)
-    toX, toY = divmod(toPos[0],size), divmod(toPos[1],size)
-    if fromY < toY: return ShipAction.NORTH
-    if fromY > toY: return ShipAction.SOUTH
-    if fromX < toX: return ShipAction.EAST
-    if fromX > toX: return ShipAction.WEST
+
 
 # Directions a ship can move
 directions = [ShipAction.NORTH, ShipAction.EAST, ShipAction.SOUTH, ShipAction.WEST]

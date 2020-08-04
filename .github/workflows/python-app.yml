@@ -10,7 +10,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -21,7 +20,7 @@ jobs:
           environment-file: environment.yaml
           python-version: 3.7
           auto-activate-base: false
-      -name: Activate conda env
+      - name: Activate conda env
         run: |
           conda activate halite
       - name: Lint with flake8

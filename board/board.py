@@ -1,30 +1,30 @@
 import numpy
-from kaggle_environments.envs.halite.helpers import Board
-from typing import Tuple
+from kaggle_environments.envs.halite.helpers import Board, Configuration, Point
+from typing import Tuple, Dict, Any, Union
 import math
 
 
-def distance(from_pos, to_pos):
-    d = difference(from_pos, to_pos)
+def pos_distance(from_pos: Point, to_pos: Point) -> float:
+    d = pos_difference(from_pos, to_pos)
     return math.sqrt(d[0] ** 2 + d[1] ** 2)
 
 
-def difference(from_pos: Tuple[int, int], to_pos: Tuple[int, int]) -> Tuple[int, int]:
-    return to_pos[0] - from_pos[0], to_pos[1] - from_pos[1]
+def pos_difference(from_pos: Point, to_pos: Point) -> Point:
+    return Point(to_pos.x - from_pos.x, to_pos.y - from_pos.y)
 
 
 class HaliteBoard:
-    def __init__(self, board, config):
+    def __init__(self, board: Dict[str, Any], config: Union[Configuration, Dict[str, Any]]):
         # Square board
         self.size = config.size
         self.dims = (self.size, self.size)
         self.board_obj = Board(board, config)
         self.board = numpy.reshape(board, newshape=self.dims)
 
-    def list_pos_to_board_pos(self, list_pos: int) -> Tuple[int, int]:
+    def list_pos_to_board_pos(self, list_pos: int) -> Point:
         """
         Convert 1d list position to 2d board position
         :param list_pos: 1d position in list
         """
         p = divmod(list_pos, self.size)
-        return p[1], p[0]
+        return Point(p[1], p[0])

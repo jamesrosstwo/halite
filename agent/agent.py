@@ -2,53 +2,43 @@
 
 # Imports helper functions
 from kaggle_environments.envs.halite.helpers import *
-from agent.ship import HaliteShip
+from agent.ship import HaliteShip, HaliteShipState
+from agent.shipyard import HaliteShipyard
+from board.board import HaliteBoard
 
 
+class HaliteAgent:
+    def __init__(self, observation: Dict[str, Any], configuration: Dict[str, Any]):
+        self.observation = observation
+        self.configuration = configuration
 
-# Directions a ship can move
-directions = [ShipAction.NORTH, ShipAction.EAST, ShipAction.SOUTH, ShipAction.WEST]
+        self.ship_states = {}
+        self.halite_board = HaliteBoard(observation, configuration)
+        self.player = self.halite_board.board_obj.current_player
+        self.ships = [HaliteShip.from_ship(x) for x in self.player.ships]
+        self.shipyards = [HaliteShipyard.from_shipyard(x) for x in self.player.shipyards]
 
-# Will keep track of whether a ship is collecting halite or carrying cargo to a shipyard
-ship_states = {}
+    def act(self) -> Dict[str, str]:
+        for ship in self.ships:
+            if ship.halite < 200:  # If cargo is too low, collect halite
+                ship.state = HaliteShipState.COLLECT
+            if ship.halite > 500:  # If cargo gets very big, deposit halite
+                ship.state = HaliteShipState.DEPOSIT
 
-# Returns the commands we send to our ships and shipyards
-def agent(obs, config):
-    size = config.size
-    board = Board(obs, config)
-    me = board.current_player
-    # print(board.step)
-    # if board.step > 1:
-    #     print(str(me.shipyards[0].cell.ship) == 'None')
-    # If there are no ships, use first shipyard to spawn a ship.
-    if len(me.shipyards) > 0 and (len(me.ships) == 0 or (me.halite > 2000 and str(me.shipyards[0].cell.ship) == 'None')):
-        me.shipyards[0].next_action = ShipyardAction.SPAWN
-
-    # If there are no shipyards, convert first ship into shipyard.
-    if len(me.shipyards) == 0 and len(me.ships) > 0:
-        me.ships[0].next_action = ShipAction.CONVERT
-    
-    for ship in me.ships:
-        if ship.next_action == None:
-            
-            ### Part 1: Set the ship's state 
-            if ship.halite < 200: # If cargo is too low, collect halite
-                ship_states[ship.id] = "COLLECT"
-            if ship.halite > 500: # If cargo gets very big, deposit halite
-                ship_states[ship.id] = "DEPOSIT"
-                
-            ### Part 2: Use the ship's state to select an action
-            if ship_states[ship.id] == "COLLECT":
-                # If halite at current location running low, 
+            if ship.state == HaliteShipState.COLLECT:
+                # If halite at current location running low,
                 # move to the adjacent square containing the most halite
                 if ship.cell.halite < 100:
-                    neighbors = [ship.cell.north.halite, ship.cell.east.halite,
-                                 ship.cell.south.halite, ship.cell.west.halite]
-                    best = max(range(len(neighbors)), key=neighbors.__getitem__)
-                    ship.next_action = directions[best]
-            if ship_states[ship.id] == "DEPOSIT":
-                # Move towards shipyard to deposit cargo
-                direction = getDirTo(ship.position, me.shipyards[0].position, size)
+                    ship.move_to_max_adjacent_halite()
+            if ship.state == HaliteShipState.DEPOSIT:
+                # Deposit to the first shipyard
+                direction = ship.get_dir_to(self.shipyards[0].position)
                 if direction: ship.next_action = direction
-                
-    return me.next_actions
+
+    def get_ship_states(self):
+        return {x.id: x.state for x in self.ships}
+
+
+def agent(observation: Dict[str, Any], configuration: Dict[str, Any]) -> Dict[str, str]:
+    halite_agent = HaliteAgent(observation, configuration)
+    return halite_agent.act()

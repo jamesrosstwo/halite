@@ -7,7 +7,7 @@ from board.board import pos_difference
 from kaggle_environments.envs.halite.helpers import Ship, ShipAction, Point, ShipId, PlayerId, Board
 
 # Directions a ship can move
-SHIP_DIRECTIONS = (ShipAction.NORTH, ShipAction.EAST, ShipAction.SOUTH, ShipAction.WEST)
+SHIP_DIRECTIONS = (None, ShipAction.NORTH, ShipAction.EAST, ShipAction.SOUTH, ShipAction.WEST)
 
 
 class HaliteShipState(Enum):
@@ -39,7 +39,11 @@ class HaliteShip(Ship):
         self.next_action = dir
 
     def adjacent_halite_counts(self):
-        return self.cell.north.halite, self.cell.east.halite, self.cell.south.halite, self.cell.west.halite
+        return self.cell.halite, \
+               self.cell.north.halite, \
+               self.cell.east.halite, \
+               self.cell.south.halite, \
+               self.cell.west.halite,
 
     def max_neighbouring_halite_dir(self):
         counts = self.adjacent_halite_counts()

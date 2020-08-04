@@ -19,7 +19,7 @@ class HaliteBoard:
         self.size = config.size
         self.dims = (self.size, self.size)
         self.board_obj = Board(board, config)
-        self.board = numpy.reshape(board, newshape=self.dims)
+        self.board = numpy.reshape(board["halite"], newshape=self.dims)
 
     def list_pos_to_board_pos(self, list_pos: int) -> Point:
         """

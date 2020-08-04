@@ -32,13 +32,32 @@ class HaliteAgent:
                     ship.move_to_max_adjacent_halite()
             if ship.state == HaliteShipState.DEPOSIT:
                 # Deposit to the first shipyard
+                if len(self.shipyards) == 0:
+                    ship.next_action = None
+                    continue
                 direction = ship.get_dir_to(self.shipyards[0].position)
                 if direction: ship.next_action = direction
+
+        return self.get_next_actions()
+
+    def get_next_actions(self) -> Dict[str, str]:
+        ship_actions = {
+            ship.id: ship.next_action.name
+            for ship in self.ships
+            if ship.next_action is not None
+        }
+        shipyard_actions = {
+            shipyard.id: shipyard.next_action.name
+            for shipyard in self.shipyards
+            if shipyard.next_action is not None
+        }
+        return {**ship_actions, **shipyard_actions}
 
     def get_ship_states(self):
         return {x.id: x.state for x in self.ships}
 
 
-def agent(observation: Dict[str, Any], configuration: Dict[str, Any]) -> Dict[str, str]:
+def halite_agent(observation: Dict[str, Any], configuration: Dict[str, Any]) -> Dict[str, str]:
     halite_agent = HaliteAgent(observation, configuration)
-    return halite_agent.act()
+    actions = halite_agent.act()
+    return actions

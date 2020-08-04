@@ -8,3 +8,4 @@ dependencies:
   - pytest
   - requests
   - idna
+  - flake8

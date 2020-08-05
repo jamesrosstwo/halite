@@ -9,4 +9,4 @@ dependencies:
   - requests
   - idna
   - flake8
-  - kaggle
+  - conda-forge::kaggle

@@ -1,12 +1,11 @@
 import numpy
 from kaggle_environments.envs.halite.helpers import Board, Configuration, Point
 from typing import Tuple, Dict, Any, Union
-import math
 
 
 def pos_distance(from_pos: Point, to_pos: Point) -> float:
     d = pos_difference(from_pos, to_pos)
-    return math.sqrt(d[0] ** 2 + d[1] ** 2)
+    return sum(map(abs, d))
 
 
 def pos_difference(from_pos: Point, to_pos: Point) -> Point:

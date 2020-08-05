@@ -1,8 +1,8 @@
 # Imports helper functions
 from enum import Enum, auto
-from typing import Tuple, Optional
+from typing import Optional
 
-from board.board import pos_difference
+from src.board.board import pos_difference
 
 from kaggle_environments.envs.halite.helpers import Ship, ShipAction, Point, ShipId, PlayerId, Board
 

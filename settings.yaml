@@ -1,2 +1,6 @@
 agent:
   replay_memory_capacity: 20
+replay:
+  mode: "html"
+  width: 800
+  height: 600

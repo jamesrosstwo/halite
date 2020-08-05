@@ -6,3 +6,6 @@ dependencies:
   - pyyaml
   - pathlib
   - pytest
+  - requests
+  - idna
+  - flake8

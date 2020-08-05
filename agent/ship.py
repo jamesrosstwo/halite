@@ -64,6 +64,6 @@ class HaliteShip(Ship):
             action = ShipAction.EAST if pos_diff[0] > 0 else ShipAction.WEST
         elif pos_diff[1] > 0:
             action = ShipAction.NORTH
-        elif pos_diff < 0:
+        elif pos_diff[1] < 0:
             action = ShipAction.SOUTH
         return action

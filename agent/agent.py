@@ -17,8 +17,14 @@ class HaliteAgent:
         self.player = self.halite_board.board_obj.current_player
         self.ships = [HaliteShip.from_ship(x) for x in self.player.ships]
         self.shipyards = [HaliteShipyard.from_shipyard(x) for x in self.player.shipyards]
-
+        
     def act(self) -> Dict[str, str]:
+        # If there are no ships, use first shipyard to spawn a ship.
+        if len(self.shipyards) > 0 and (len(self.ships) == 0 or (self.player.halite > 2000 and str(self.shipyards[0].cell.ship) == 'None')):
+            self.shipyards[0].next_action = ShipyardAction.SPAWN
+        # If there are no shipyards, convert first ship into shipyard.
+        if len(self.shipyards) == 0 and len(self.ships) > 0:
+            self.ships[0].next_action = ShipAction.CONVERT
         for ship in self.ships:
             if ship.halite < 200:  # If cargo is too low, collect halite
                 ship.state = HaliteShipState.COLLECT

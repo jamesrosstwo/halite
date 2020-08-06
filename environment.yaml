@@ -9,4 +9,5 @@ dependencies:
   - requests
   - idna
   - flake8
+  - torch
   - conda-forge::kaggle

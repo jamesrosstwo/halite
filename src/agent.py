@@ -4,6 +4,8 @@ from src.entities.ship import HaliteShip, HaliteShipState
 from src.entities.shipyard import HaliteShipyard
 from src.board.board import HaliteBoard
 
+import torch
+
 
 class HaliteAgent:
     def __init__(self, observation: Dict[str, Any], configuration: Dict[str, Any]):
@@ -59,3 +61,5 @@ class HaliteAgent:
 
     def get_ship_states(self):
         return {x.id: x.state for x in self.ships}
+
+

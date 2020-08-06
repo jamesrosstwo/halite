@@ -12,11 +12,8 @@ if __name__ == "__main__":
     module_export_path = module_export_dir / SETTINGS["submit"]["export_file_name"]
     module_export_path.touch(exist_ok=True)
 
-
-
     settings_str = "SETTINGS = " + str(json.dumps(SETTINGS))
     module_text = [settings_str]
-
 
     for root, dirs, files in os.walk(str(ROOT_PATH / (SETTINGS["agent"]["dir"])), topdown=False):
         for name in files:
@@ -44,7 +41,7 @@ if __name__ == "__main__":
         module_export_file.write(module_text_str)
         module_export_file.close()
 
-
-    submit_command = 'kaggle competitions submit -c halite -f ' + str(module_export_path) + ' -m "Deploy Script Submission"'
+    submit_command = 'kaggle competitions submit -c halite -f ' + str(
+        module_export_path) + ' -m "Deploy Script Submission"'
 
     os.system(submit_command)

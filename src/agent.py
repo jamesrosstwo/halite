@@ -1,10 +1,8 @@
-# %%writefile submission.py
-
 # Imports helper functions
 from kaggle_environments.envs.halite.helpers import *
-from agent.ship import HaliteShip, HaliteShipState
-from agent.shipyard import HaliteShipyard
-from board.board import HaliteBoard
+from src.entities.ship import HaliteShip, HaliteShipState
+from src.entities.shipyard import HaliteShipyard
+from src.board.board import HaliteBoard
 
 
 class HaliteAgent:
@@ -61,9 +59,3 @@ class HaliteAgent:
 
     def get_ship_states(self):
         return {x.id: x.state for x in self.ships}
-
-
-def halite_agent(observation: Dict[str, Any], configuration: Dict[str, Any]) -> Dict[str, str]:
-    halite_agent = HaliteAgent(observation, configuration)
-    actions = halite_agent.act()
-    return actions

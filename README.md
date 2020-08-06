@@ -11,3 +11,13 @@ conda activate halite
 ```
 
 [Add pytorch to your conda environment](https://pytorch.org/get-started/locally/)
+
+
+## Submission
+
+```bash
+python submit.py
+```
+
+The agent script will be compiled in the build directory specified in settings.yaml, and submitted your 
+[API Credentials](https://github.com/Kaggle/kaggle-api#api-credentials):

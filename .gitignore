@@ -3,3 +3,4 @@
 **.pyc
 /games
 /.pytest_cache
+/build

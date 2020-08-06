@@ -19,30 +19,7 @@ class HaliteAgent:
         self.shipyards = [HaliteShipyard.from_shipyard(x) for x in self.player.shipyards]
         
     def act(self) -> Dict[str, str]:
-        # If there are no ships, use first shipyard to spawn a ship.
-        if len(self.shipyards) > 0 and (len(self.ships) == 0 or (self.player.halite > 2000 and str(self.shipyards[0].cell.ship) == 'None')):
-            self.shipyards[0].next_action = ShipyardAction.SPAWN
-        # If there are no shipyards, convert first ship into shipyard.
-        if len(self.shipyards) == 0 and len(self.ships) > 0:
-            self.ships[0].next_action = ShipAction.CONVERT
-        for ship in self.ships:
-            if ship.halite < 200:  # If cargo is too low, collect halite
-                ship.state = HaliteShipState.COLLECT
-            if ship.halite > 500:  # If cargo gets very big, deposit halite
-                ship.state = HaliteShipState.DEPOSIT
-
-            if ship.state == HaliteShipState.COLLECT:
-                # If halite at current location running low,
-                # move to the adjacent square containing the most halite
-                if ship.cell.halite < 100:
-                    ship.move_to_max_adjacent_halite()
-            if ship.state == HaliteShipState.DEPOSIT:
-                # Deposit to the first shipyard
-                if len(self.shipyards) == 0:
-                    ship.next_action = None
-                    continue
-                direction = ship.get_dir_to(self.shipyards[0].position)
-                if direction: ship.next_action = direction
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
         return self.get_next_actions()
 

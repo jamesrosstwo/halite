@@ -1,3 +1,6 @@
 /venv
 /.idea
 **.pyc
+/games
+/.pytest_cache
+/build

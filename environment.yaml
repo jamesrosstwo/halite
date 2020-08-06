@@ -1,6 +1,13 @@
-name: connect-four
+name: halite
 dependencies:
   - numpy
   - matplotlib
   - pillow
   - pyyaml
+  - pathlib
+  - pytest
+  - requests
+  - idna
+  - flake8
+  - torch
+  - conda-forge::kaggle

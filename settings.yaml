@@ -1,2 +1,11 @@
 agent:
+  dir: "src"
+  submission_file_name: "submission_agent.py"
   replay_memory_capacity: 20
+replay:
+  mode: "html"
+  width: 800
+  height: 600
+submit:
+  export_dir: "build" # If this is changed, gitignore must be modified
+  export_file_name: "export.py"

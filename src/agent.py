@@ -1,7 +1,4 @@
-# Imports helper functions
 from kaggle_environments.envs.halite.helpers import *
-from src.entities.ship import HaliteShip, HaliteShipState
-from src.entities.shipyard import HaliteShipyard
 from src.board.board import HaliteBoard
 
 import torch
@@ -14,9 +11,9 @@ class HaliteAgent:
 
         self.ship_states = {}
         self.halite_board = HaliteBoard(observation, configuration)
-        self.player = self.halite_board.board_obj.current_player
-        self.ships = [HaliteShip.from_ship(x) for x in self.player.ships]
-        self.shipyards = [HaliteShipyard.from_shipyard(x) for x in self.player.shipyards]
+        self.player = self.halite_board.player
+        self.ships = self.player.halite_ships
+        self.shipyards = self.player.halite_ships
         
     def act(self) -> Dict[str, str]:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

@@ -14,7 +14,6 @@ class HaliteShipState(Enum):
     COLLECT = auto()
     DEPOSIT = auto()
 
-
 class HaliteShip(Ship):
     """
     Agent for an individual ship. Contains things like pathfinding to desired location,

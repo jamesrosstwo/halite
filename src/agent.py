@@ -12,12 +12,11 @@ class HaliteAgent:
         self.ship_states = {}
         self.halite_board = HaliteBoard(observation, configuration)
         self.player = self.halite_board.player
-        self.ships = self.player.halite_ships
-        self.shipyards = self.player.halite_ships
+        self.ships = self.player.ships
+        self.shipyards = self.player.ships
         
     def act(self) -> Dict[str, str]:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
         return self.get_next_actions()
 
     def get_next_actions(self) -> Dict[str, str]:

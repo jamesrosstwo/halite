@@ -11,3 +11,8 @@ class HaliteShipyard(Shipyard):
 
     def spawn(self):
         pass
+
+    @property
+    def player(self):
+        from src.entities.player import HalitePlayer
+        return HalitePlayer.from_player(super().player)

@@ -14,7 +14,6 @@ class HaliteShipState(Enum):
     COLLECT = auto()
     DEPOSIT = auto()
 
-
 class HaliteShip(Ship):
     """
     Agent for an individual ship. Contains things like pathfinding to desired location,
@@ -67,3 +66,8 @@ class HaliteShip(Ship):
         elif pos_diff[1] < 0:
             action = ShipAction.SOUTH
         return action
+
+    @property
+    def player(self):
+        from src.entities.player import HalitePlayer
+        return HalitePlayer.from_player(super().player)

@@ -1,6 +1,6 @@
 from kaggle_environments import make
 from src.constants import ROOT_PATH, SETTINGS
-from build.export import halite_agent
+from src.submission_agent import halite_agent
 
 if __name__ == "__main__":
     print("Making environment")

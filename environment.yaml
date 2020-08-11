@@ -10,3 +10,4 @@ dependencies:
   - idna
   - flake8
   - conda-forge::kaggle
+  - conda-forge::gym

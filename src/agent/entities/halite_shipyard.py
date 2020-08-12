@@ -1,4 +1,4 @@
-from kaggle_environments.envs.halite.helpers import Shipyard, ShipyardAction, ShipyardId, Point, PlayerId, Board
+from kaggle_environments.envs.halite.helpers import Shipyard, ShipyardId, Point, PlayerId, Board
 
 
 class HaliteShipyard(Shipyard):
@@ -14,5 +14,5 @@ class HaliteShipyard(Shipyard):
 
     @property
     def player(self):
-        from src.entities.player import HalitePlayer
+        from src.agent.entities.player import HalitePlayer
         return HalitePlayer.from_player(super().player)

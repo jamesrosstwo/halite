@@ -2,8 +2,9 @@ from typing import List
 
 from kaggle_environments.envs.halite.helpers import Player, PlayerId, ShipyardId, ShipId, Board
 
-from src.entities.ship import HaliteShip
-from src.entities.shipyard import HaliteShipyard
+from src.agent.entities.halite_ship import HaliteShip
+from src.agent.entities.halite_shipyard import HaliteShipyard
+
 
 class HalitePlayer(Player):
 
@@ -11,13 +12,12 @@ class HalitePlayer(Player):
                  board: Board):
         super().__init__(player_id, halite, shipyard_ids, ship_ids, board)
 
-
     @property
-    def ships(self) -> List[HaliteShip]:
+    def ships(self) -> List['HaliteShip']:
         return [HaliteShip.from_ship(x) for x in super().ships]
 
     @property
-    def shipyards(self) -> List[HaliteShipyard]:
+    def shipyards(self) -> List['HaliteShipyard']:
         return [HaliteShipyard.from_shipyard(x) for x in super().shipyards]
 
     @classmethod

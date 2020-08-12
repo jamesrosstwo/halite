@@ -1,5 +1,5 @@
 from kaggle_environments.envs.halite.helpers import *
-from src.board.board import HaliteBoard
+from src.agent.board.board import HaliteBoard
 
 import torch
 

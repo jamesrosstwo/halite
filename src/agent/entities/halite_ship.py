@@ -2,7 +2,7 @@
 from enum import Enum, auto
 from typing import Optional
 
-from src.board.board import pos_difference
+from src.agent.board.board import pos_difference
 
 from kaggle_environments.envs.halite.helpers import Ship, ShipAction, Point, ShipId, PlayerId, Board
 
@@ -69,5 +69,5 @@ class HaliteShip(Ship):
 
     @property
     def player(self):
-        from src.entities.player import HalitePlayer
+        from src.agent.entities.player import HalitePlayer
         return HalitePlayer.from_player(super().player)

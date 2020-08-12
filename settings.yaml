@@ -1,5 +1,5 @@
 agent:
-  dir: "src"
+  dir: "src/agent"
   submission_file_name: "submission_agent.py"
   replay_memory_capacity: 20
 replay:
@@ -15,3 +15,5 @@ board:
 learn:
   dqn:
     input_dims: [9, 21, 21]
+gym:
+  version: 0.1

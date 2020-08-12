@@ -45,7 +45,7 @@ class HaliteBoard(Board):
 
     def parse_cell(self, cell: Cell) -> List[float]:
         out = [0. for _ in range(self.dims[0])]
-        # Bound halite between 0 and 1
+        # Bound agent between 0 and 1
         out[0] = cell.halite / self.settings["max_cell_halite"]
 
         if cell.ship is not None:
@@ -114,9 +114,9 @@ class HaliteBoard(Board):
         return np.flatten([p.shipyards for p in self.opponents])
 
 
-from src.entities.ship import HaliteShip
-from src.entities.shipyard import HaliteShipyard
-from src.entities.player import HalitePlayer
+from src.agent.entities.halite_ship import HaliteShip
+from src.agent.entities.halite_shipyard import HaliteShipyard
+from src.agent.entities.player import HalitePlayer
 
 if __name__ == "__main__":
     a = np.zeros((10, 10, 10))

@@ -1,4 +1,4 @@
-name: halite
+name: agent
 dependencies:
   - numpy
   - matplotlib

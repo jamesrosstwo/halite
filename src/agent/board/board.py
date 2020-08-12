@@ -45,7 +45,7 @@ class HaliteBoard(Board):
 
     def parse_cell(self, cell: Cell) -> List[float]:
         out = [0. for _ in range(self.dims[0])]
-        # Bound agent between 0 and 1
+        # Bound halite between 0 and 1
         out[0] = cell.halite / self.settings["max_cell_halite"]
 
         if cell.ship is not None:

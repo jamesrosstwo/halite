@@ -24,4 +24,6 @@ The agent script will be compiled in the build directory specified in settings.y
 
 
 ## Gym
+OpenAI Gym environment to easily carry out reinforcement learning
 
+### Installation

@@ -5,5 +5,5 @@ version_id = "halite-" + SETTINGS["gym"]["version"]
 
 register(
     id=version_id,
-    entry_point='gym_foo.envs:FooEnv',
+    entry_point='src.halite_gym.envs:HaliteEnv',
 )

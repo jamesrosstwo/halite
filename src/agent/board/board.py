@@ -3,6 +3,7 @@ from typing import Dict, Any, Union, List, Tuple, Optional
 import numpy as np
 from src.constants import SETTINGS
 
+CURRENT_MAP = None
 
 def pos_distance(from_pos: Point, to_pos: Point) -> float:
     d = pos_difference(from_pos, to_pos)
@@ -26,6 +27,7 @@ class HaliteBoard(Board):
         self.dims = tuple(self.settings["size"])
         self._ordered_player_ids = self.calculate_p_id_list()
         self.map = self.parse_map()
+        CURRENT_MAP = self.map
 
     def calculate_p_id_list(self) -> List[int]:
         """

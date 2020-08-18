@@ -14,15 +14,25 @@ class HaliteShipState(Enum):
     COLLECT = auto()
     DEPOSIT = auto()
 
+
 class HaliteShip(Ship):
     """
     Agent for an individual ship. Contains things like pathfinding to desired location,
     and performing ship actions
     """
 
-    def __init__(self, ship_id: ShipId, position: Point, halite: int, player_id: PlayerId, board: 'Board'):
+    def __init__(
+            self,
+            ship_id: ShipId,
+            position: Point,
+            halite: int,
+            player_id: PlayerId,
+            board: 'Board',
+    ):
+        from src.agent.learning.ship_agent import HaliteShipAgent
         super().__init__(ship_id, position, halite, player_id, board)
         self.state = HaliteShipState.COLLECT
+        self.agent = HaliteShipAgent(self)
 
     @classmethod
     def from_ship(cls, ship_obj: Ship):
@@ -68,6 +78,9 @@ class HaliteShip(Ship):
         return action
 
     @property
-    def player(self):
+    def player(self) -> "HalitePlayer":
         from src.agent.entities.player import HalitePlayer
         return HalitePlayer.from_player(super().player)
+
+
+from src.agent.entities.player import HalitePlayer

@@ -3,7 +3,6 @@ from typing import Dict, Any, Union, List, Tuple, Optional
 import numpy as np
 from src.constants import SETTINGS
 
-CURRENT_MAP = None
 
 def pos_distance(from_pos: Point, to_pos: Point) -> float:
     d = pos_difference(from_pos, to_pos)
@@ -25,22 +24,33 @@ class HaliteBoard(Board):
         self.settings = SETTINGS["board"]
         self.size = config.size
         self.dims = tuple(self.settings["size"])
-        self._ordered_player_ids = self.calculate_p_id_list()
+        self._ordered_player_map = self.calculate_p_id_map()
         self.map = self.parse_map()
-        CURRENT_MAP = self.map
 
-    def calculate_p_id_list(self) -> List[int]:
+    @classmethod
+    def from_board(cls, board: Board):
+        return cls(board.observation, board.configuration)
+
+
+    @property
+    def _sorted_player_ids(self) -> List[int]:
         """
-        Calculates the ordered player ID list. Used for parsing the board.
+        The ordered player ID list. Used for parsing the board.
         :return: A list of all player IDs with the agent's player ID at index 0
         """
+        return list(self._ordered_player_map.keys())
+
+    def calculate_p_id_map(self) -> Dict[int, int]:
+
         ids = set(self.players.keys())
         ids.remove(self.current_player_id)
-        return [self.current_player_id] + list(ids)
+        id_list = [self.current_player_id] + list(ids)
+        return {v: idx for idx, v in enumerate(id_list)}
 
     def parse_map(self) -> np.ndarray:
         out_array = np.zeros(self.dims)
         cells = self.cells
+        i = 0
         for cell in cells.values():
             out_array[:, cell.position.y, cell.position.x] = self.parse_cell(cell)
         return out_array
@@ -51,11 +61,11 @@ class HaliteBoard(Board):
         out[0] = cell.halite / self.settings["max_cell_halite"]
 
         if cell.ship is not None:
-            ship_idx = self._ordered_player_ids.index(cell.ship.player_id) + 1
+            ship_idx = self._ordered_player_map[cell.ship.player_id] + 1
             out[ship_idx] = 1.
 
         if cell.shipyard is not None:
-            shipyard_idx = self._ordered_player_ids.index(cell.shipyard.player_id) + 5
+            shipyard_idx = self._ordered_player_map[cell.shipyard.player_id] + 5
             out[shipyard_idx] = 1.
 
         return out
@@ -67,13 +77,13 @@ class HaliteBoard(Board):
         cell = self.cells[pos]
         ship = cell.ship
         if ship is not None:
-            return HaliteShip.from_ship(ship)
+            return HaliteShip.from_ship(ship, self)
 
     def shipyard_at_pos(self, pos: Point) -> Optional['HaliteShipyard']:
         cell = self.cells[pos]
         shipyard = cell.shipyard
         if shipyard is not None:
-            return HaliteShipyard.from_shipyard(shipyard)
+            return HaliteShipyard.from_shipyard(shipyard, self)
 
     def shipyard_map(self, player_id) -> np.ndarray:
         return self.map[player_id + 5, :, :]
@@ -88,20 +98,19 @@ class HaliteBoard(Board):
 
     @property
     def halite_players(self) -> Dict[PlayerId, 'HalitePlayer']:
-        return {id: HalitePlayer.from_player(p) for id, p in super().players.items()}\
+        return {id: HalitePlayer.from_player(p) for id, p in super().players.items()}
 
     @property
     def player(self) -> 'HalitePlayer':
         return self.halite_players[self.current_player_id]
 
-
     @property
     def ships(self) -> Dict[ShipId, 'HaliteShip']:
-        return {k: HaliteShip.from_ship(v) for k, v in super().ships.items()}
+        return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
 
     @property
     def shipyards(self) -> Dict[ShipyardId, 'HaliteShipyard']:
-        return {k: HaliteShipyard.from_shipyard(v) for k, v in super().shipyards.items()}
+        return {k: HaliteShipyard.from_shipyard(v, self) for k, v in super().shipyards.items()}
 
     @property
     def opponents(self) -> List['HalitePlayer']:

@@ -28,15 +28,17 @@ class HaliteShip(Ship):
             halite: int,
             player_id: PlayerId,
             board: 'Board',
+            halite_board: 'HaliteBoard'
     ):
         from src.agent.learning.ship_agent import HaliteShipAgent
         super().__init__(ship_id, position, halite, player_id, board)
         self.state = HaliteShipState.COLLECT
-        self.agent = HaliteShipAgent(self)
+        self.agent = HaliteShipAgent()
+        self._halite_board = halite_board
 
     @classmethod
-    def from_ship(cls, ship_obj: Ship):
-        return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board)
+    def from_ship(cls, ship_obj: Ship, halite_board: "HaliteBoard"):
+        return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
 
     def convert(self):
         self.next_action = ShipAction.CONVERT
@@ -82,5 +84,10 @@ class HaliteShip(Ship):
         from src.agent.entities.player import HalitePlayer
         return HalitePlayer.from_player(super().player)
 
+    @property
+    def board(self) -> "HaliteBoard":
+        return self._halite_board
+
 
 from src.agent.entities.player import HalitePlayer
+from src.agent.board.board import HaliteBoard

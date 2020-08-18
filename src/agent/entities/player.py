@@ -4,6 +4,7 @@ from kaggle_environments.envs.halite.helpers import Player, PlayerId, ShipyardId
 
 from src.agent.entities.halite_ship import HaliteShip
 from src.agent.entities.halite_shipyard import HaliteShipyard
+from src.agent.board.board import HaliteBoard
 
 
 class HalitePlayer(Player):
@@ -11,14 +12,19 @@ class HalitePlayer(Player):
     def __init__(self, player_id: PlayerId, halite: int, shipyard_ids: List[ShipyardId], ship_ids: List[ShipId],
                  board: Board):
         super().__init__(player_id, halite, shipyard_ids, ship_ids, board)
+        self._halite_board = HaliteBoard.from_board(self._board)
 
     @property
     def ships(self) -> List['HaliteShip']:
-        return [HaliteShip.from_ship(x) for x in super().ships]
+        return [HaliteShip.from_ship(x, self.board) for x in super().ships]
 
     @property
     def shipyards(self) -> List['HaliteShipyard']:
-        return [HaliteShipyard.from_shipyard(x) for x in super().shipyards]
+        return [HaliteShipyard.from_shipyard(x, self.board) for x in super().shipyards]
+
+    @property
+    def board(self):
+        return self._halite_board
 
     @classmethod
     def from_player(cls, player_obj: Player):

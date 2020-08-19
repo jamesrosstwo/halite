@@ -12,8 +12,7 @@ class HaliteShipyard(Shipyard):
     ):
         super().__init__(shipyard_id, position, player_id, board)
         self._halite_board = halite_board
-        from src.agent.entities.player import HalitePlayer
-        self._halite_player = HalitePlayer.from_player(super().player)
+        self._halite_player = halite_board.halite_players[player_id]
 
     @classmethod
     def from_shipyard(cls, shipyard_obj: Shipyard, halite_board: "HaliteBoard"):

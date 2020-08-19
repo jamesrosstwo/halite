@@ -21,11 +21,18 @@ class HaliteBoard(Board):
     def __init__(self, board: Dict[str, Any], config: Union[Configuration, Dict[str, Any]]):
         # Square board
         super().__init__(board, config)
+
+
+        self._halite_players = None
+        self._halite_ships = None
+        self._halite_shipyards = None
+
+        self._populate_halite_objs()
+
         self.settings = SETTINGS["board"]
         self.size = config.size
         self.dims = tuple(self.settings["size"])
-        self._halite_ships = {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
-        self._halite_shipyards = {k: HaliteShipyard.from_shipyard(v, self) for k, v in super().shipyards.items()}
+
         self._ordered_player_map = self.calculate_p_id_map()
         self.map = self.parse_map()
 
@@ -33,6 +40,11 @@ class HaliteBoard(Board):
     def from_board(cls, board: Board):
         return cls(board.observation, board.configuration)
 
+
+    def _populate_halite_objs(self):
+        self._halite_players = {id: HalitePlayer.from_player(p, self) for id, p in super().players.items()}
+        self._halite_ships = {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+        self._halite_shipyards = {k: HaliteShipyard.from_shipyard(v, self) for k, v in super().shipyards.items()}
 
     @property
     def _sorted_player_ids(self) -> List[int]:
@@ -61,9 +73,7 @@ class HaliteBoard(Board):
         # Bound halite between 0 and 1
         out[0] = cell.halite / self.settings["max_cell_halite"]
 
-        print("ship")
         if cell.ship is not None:
-            print("ship2")
             ship_idx = self._ordered_player_map[cell.ship.player_id] + 1
             out[ship_idx] = 1.
 
@@ -101,7 +111,7 @@ class HaliteBoard(Board):
 
     @property
     def halite_players(self) -> Dict[PlayerId, 'HalitePlayer']:
-        return {id: HalitePlayer.from_player(p) for id, p in super().players.items()}
+        return self._halite_players
 
     @property
     def player(self) -> 'HalitePlayer':
@@ -117,7 +127,7 @@ class HaliteBoard(Board):
 
     @property
     def opponents(self) -> List['HalitePlayer']:
-        return list(map(HalitePlayer.from_player, super().players))
+        return [HalitePlayer.from_player(x, self) for x in super().players]
 
     @property
     def opponent_ships(self) -> List['HaliteShip']:

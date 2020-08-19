@@ -35,6 +35,8 @@ class HaliteShip(Ship):
         self.state = HaliteShipState.COLLECT
         self.agent = HaliteShipAgent()
         self._halite_board = halite_board
+        from src.agent.entities.player import HalitePlayer
+        self._halite_player = HalitePlayer.from_player(super().player)
 
     @classmethod
     def from_ship(cls, ship_obj: Ship, halite_board: "HaliteBoard"):
@@ -81,13 +83,11 @@ class HaliteShip(Ship):
 
     @property
     def player(self) -> "HalitePlayer":
-        from src.agent.entities.player import HalitePlayer
-        return HalitePlayer.from_player(super().player)
+        return self._halite_player
 
     @property
     def board(self) -> "HaliteBoard":
         return self._halite_board
 
 
-from src.agent.entities.player import HalitePlayer
 from src.agent.board.board import HaliteBoard

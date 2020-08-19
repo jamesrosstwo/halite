@@ -24,6 +24,8 @@ class HaliteBoard(Board):
         self.settings = SETTINGS["board"]
         self.size = config.size
         self.dims = tuple(self.settings["size"])
+        self._halite_ships = {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+        self._halite_shipyards = {k: HaliteShipyard.from_shipyard(v, self) for k, v in super().shipyards.items()}
         self._ordered_player_map = self.calculate_p_id_map()
         self.map = self.parse_map()
 
@@ -50,7 +52,6 @@ class HaliteBoard(Board):
     def parse_map(self) -> np.ndarray:
         out_array = np.zeros(self.dims)
         cells = self.cells
-        i = 0
         for cell in cells.values():
             out_array[:, cell.position.y, cell.position.x] = self.parse_cell(cell)
         return out_array
@@ -60,7 +61,9 @@ class HaliteBoard(Board):
         # Bound halite between 0 and 1
         out[0] = cell.halite / self.settings["max_cell_halite"]
 
+        print("ship")
         if cell.ship is not None:
+            print("ship2")
             ship_idx = self._ordered_player_map[cell.ship.player_id] + 1
             out[ship_idx] = 1.
 
@@ -106,11 +109,11 @@ class HaliteBoard(Board):
 
     @property
     def ships(self) -> Dict[ShipId, 'HaliteShip']:
-        return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+        return self._halite_ships
 
     @property
     def shipyards(self) -> Dict[ShipyardId, 'HaliteShipyard']:
-        return {k: HaliteShipyard.from_shipyard(v, self) for k, v in super().shipyards.items()}
+        return self._halite_shipyards
 
     @property
     def opponents(self) -> List['HalitePlayer']:

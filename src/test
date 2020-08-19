@@ -1,0 +1,1705 @@
+ File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\agent.py", line 124, in act    action = self.agent(*args)', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\submission_agent.py", line 7, in halite_agent    halite_agent = HaliteAgent(observation, configuration)', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\agent.py", line 13, in __init__
+self.halite_board = HaliteBoard(observation, configuration)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 28, in __init__
+self.map = self.parse_map()
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 54, in parse_map
+out_array[:, cell.position.y, cell.position.x] = self.parse_cell(cell)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 63, in parse_cell
+if cell.ship is not None:
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 317, in ship
+return self._board.ships.get(self.ship_id)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 39, in __init__
+self._halite_player = HalitePlayer.from_player(super().player)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 31, in from_player
+return cls(player_obj.id, player_obj.halite, player_obj.shipyard_ids, player_obj.ship_ids, player_obj._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\player.py", line 13, in __init__
+self._halite_board = HaliteBoard.from_board(self._board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 32, in from_board
+return cls(board.observation, board.configuration)
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in observation
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 635, in <listcomp>
+players = [player._observation for player in self.players.values()]
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 510, in _observation
+ships = {ship.id: ship._observation for ship in self.ships}
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in ships
+for ship_id in self.ship_ids
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\kaggle_environments\\envs\\halite\\helpers.py", line 483, in <listcomp>
+for ship_id in self.ship_ids
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in ships
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\board\\board.py", line 110, in <dictcomp>
+return {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 43, in from_ship
+return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\entities\\halite_ship.py", line 36, in __init__
+self.agent = HaliteShipAgent()
+', '  File "C:\\Users\\james\\Desktop\\halite\\src\\agent\\learning\\ship_agent.py", line 7, in __init__
+super(HaliteShipAgent, self).__init__()
+', '  File "C:\\ProgramData\\Anaconda3\\envs\\halite\\lib\\site-packages\\torch\
+n\\modules\\module.py", line 206, in __init__
+torch._C._log_api_usage_once("python.nn_module")
+', 'RecursionError: maximum recursion depth exceeded while calling a Python object
+']

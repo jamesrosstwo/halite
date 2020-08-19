@@ -17,7 +17,7 @@ class HaliteAgent:
         
     def act(self) -> Dict[str, str]:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        return self.get_next_actions()
+        return None #self.get_next_actions()
 
     def get_next_actions(self) -> Dict[str, str]:
         ship_actions = {

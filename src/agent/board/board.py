@@ -22,10 +22,11 @@ class HaliteBoard(Board):
         # Square board
         super().__init__(board, config)
 
-
         self._halite_players = None
         self._halite_ships = None
         self._halite_shipyards = None
+        self._halite_opponents = None
+        self._halite_opponent_ships = None
 
         self._populate_halite_objs()
 
@@ -34,17 +35,22 @@ class HaliteBoard(Board):
         self.dims = tuple(self.settings["size"])
 
         self._ordered_player_map = self.calculate_p_id_map()
+
         self.map = self.parse_map()
 
     @classmethod
+
+
+
     def from_board(cls, board: Board):
         return cls(board.observation, board.configuration)
-
 
     def _populate_halite_objs(self):
         self._halite_players = {id: HalitePlayer.from_player(p, self) for id, p in super().players.items()}
         self._halite_ships = {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
         self._halite_shipyards = {k: HaliteShipyard.from_shipyard(v, self) for k, v in super().shipyards.items()}
+        self._halite_opponents = [HalitePlayer.from_player(x, self) for x in super().players]
+        self._halite_opponent_ships = np.flatten([p.ships for p in self.opponents])
 
     @property
     def _sorted_player_ids(self) -> List[int]:
@@ -127,11 +133,11 @@ class HaliteBoard(Board):
 
     @property
     def opponents(self) -> List['HalitePlayer']:
-        return [HalitePlayer.from_player(x, self) for x in super().players]
+        return self._halite_opponents
 
     @property
     def opponent_ships(self) -> List['HaliteShip']:
-        return np.flatten([p.ships for p in self.opponents])
+        return self._halite_opponent_ships
 
     @property
     def opponent_shipyards(self) -> List['HaliteShipyard']:

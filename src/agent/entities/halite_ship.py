@@ -13,6 +13,7 @@ SHIP_DIRECTIONS = (None, ShipAction.NORTH, ShipAction.EAST, ShipAction.SOUTH, Sh
 class HaliteShipState(Enum):
     COLLECT = auto()
     DEPOSIT = auto()
+    MOVE = auto()
 
 
 class HaliteShip(Ship):
@@ -31,10 +32,8 @@ class HaliteShip(Ship):
             halite_board: 'HaliteBoard'
     ):
 
-        from src.agent.learning.ship_agent import HaliteShipAgent
         super().__init__(ship_id, position, halite, player_id, board)
         self.state = HaliteShipState.COLLECT
-        self.agent = HaliteShipAgent()
         self._halite_board = halite_board
         self._halite_player = halite_board.halite_players[player_id]
 

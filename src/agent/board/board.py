@@ -32,16 +32,13 @@ class HaliteBoard(Board):
 
         self.settings = SETTINGS["board"]
         self.size = config.size
-        self.dims = tuple(self.settings["size"])
+        self.dims = tuple(self.settings["dims"])
 
         self._ordered_player_map = self.calculate_p_id_map()
 
         self.map = self.parse_map()
 
     @classmethod
-
-
-
     def from_board(cls, board: Board):
         return cls(board.observation, board.configuration)
 
@@ -50,7 +47,7 @@ class HaliteBoard(Board):
         self._halite_ships = {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
         self._halite_shipyards = {k: HaliteShipyard.from_shipyard(v, self) for k, v in super().shipyards.items()}
         self._halite_opponents = [HalitePlayer.from_player(x, self) for x in super().players]
-        self._halite_opponent_ships = np.flatten([p.ships for p in self.opponents])
+        self._halite_opponent_ships = list(np.asarray([p.ships for p in self.opponents]).flatten())
 
     @property
     def _sorted_player_ids(self) -> List[int]:

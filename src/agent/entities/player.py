@@ -10,15 +10,19 @@ class HalitePlayer(Player):
         super().__init__(player_id, halite, shipyard_ids, ship_ids, board)
 
         self._halite_board = halite_board
+        self._halite_ships = []
+        self._halite_shipyards = []
+
+    def set_halite_objs(self):
         self._halite_ships = self.get_halite_ships()
         self._halite_shipyards = self.get_halite_shipyards()
 
     def get_halite_ships(self):
-        all_ships = self._halite_board.ships
+        all_ships = self._halite_board.ships.values()
         return [x for x in all_ships if x.player_id == self.id]
 
     def get_halite_shipyards(self):
-        all_shipyards = self.board.shipyards
+        all_shipyards = self.board.shipyards.values()
         return [x for x in all_shipyards if x.player_id == self.id]
 
     @property

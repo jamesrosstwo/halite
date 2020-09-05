@@ -43,11 +43,14 @@ class HaliteBoard(Board):
         return cls(board.observation, board.configuration)
 
     def _populate_halite_objs(self):
-        self._halite_players = {id: HalitePlayer.from_player(p, self) for id, p in super().players.items()}
+        self._halite_players = {p_id: HalitePlayer.from_player(p, self) for p_id, p in super().players.items()}
         self._halite_ships = {k: HaliteShip.from_ship(v, self) for k, v in super().ships.items()}
         self._halite_shipyards = {k: HaliteShipyard.from_shipyard(v, self) for k, v in super().shipyards.items()}
-        self._halite_opponents = [HalitePlayer.from_player(x, self) for x in super().players]
-        self._halite_opponent_ships = list(np.asarray([p.ships for p in self.opponents]).flatten())
+        self._halite_opponents = {p_id: p for p_id, p in self._halite_players.items() if p_id != self.current_player_id}
+        self._halite_opponent_ships = list(np.asarray([p.ships for p in self._halite_opponents.values()]).flatten())
+
+        for player in self._halite_players.values():
+            player.set_halite_objs()
 
     @property
     def _sorted_player_ids(self) -> List[int]:

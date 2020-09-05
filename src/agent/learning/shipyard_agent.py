@@ -1,3 +1,6 @@
+from abc import ABCMeta
+
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
@@ -32,32 +35,29 @@ def parse_input(shipyard: HaliteShipyard, board_input: np.ndarray):
 
     # Encode player position
     final_shipyard_input = [shipyard.position.x, shipyard.position.y]
-    final_shipyard_input += shipyard_input.flatten()
-    return final_shipyard_input
+    final_shipyard_input = final_shipyard_input + list(shipyard_input.flatten())
+    return torch.from_numpy(np.array(final_shipyard_input, dtype=np.float32))
 
 
-class HaliteShipyardAgent(nn.Module):
+class HaliteShipyardAgent(nn.Module, metaclass=ABCMeta):
     """
     Agent to go from state to shipyard action
     """
 
     def __init__(self):
         super(HaliteShipyardAgent, self).__init__()
-        input_size = np.prod(SETTINGS["board"]["dims"])
+        input_size = np.prod(SETTINGS["board"]["dims"]) + 2
         output_size = 2
-        batch_size = SETTINGS["learn"]["batch_size"]
-        self.conv1 = nn.Conv1d(batch_size, input_size, 1)
-        self.conv2 = nn.Conv1d(batch_size, int(input_size * 1.2), 1)
-        self.conv3 = nn.Conv1d(batch_size, input_size // 80, 1)
-        self.output_layer = nn.Conv1d(batch_size, output_size, 1)
+        self.conv1 = nn.Linear(input_size, int(input_size * 1.2))
+        self.conv2 = nn.Linear(int(input_size * 1.2), input_size // 80)
+        self.output_layer = nn.Linear(input_size // 80, output_size)
 
     def forward(self, x):
         y = F.relu(self.conv1(x))
         y = F.relu(self.conv2(y))
-        y = F.relu(self.conv3(y))
         y = F.relu(self.output_layer(y))
         return y
 
     def act(self, shipyard: HaliteShipyard, board_input: np.ndarray):
         shipyard_input = parse_input(shipyard, board_input)
-        return self.forward(shipyard_input)
+        return self.forward(shipyard_input).argmax().item()

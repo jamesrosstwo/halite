@@ -36,6 +36,7 @@ class HaliteAgent:
             for ship in self.ships
             if ship.next_action is not None
         }
+
         shipyard_actions = {
             shipyard.id: shipyard.next_action.name
             for shipyard in self.shipyards

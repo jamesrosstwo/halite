@@ -19,7 +19,7 @@ SHIP_ACTION_MAP = {
 }
 
 
-def parse_input(ship: HaliteShip, board_input: np.ndarray):
+def parse_input(ship: HaliteShip, board_input: np.ndarray, device="cuda"):
     """
     Parses board state to NN input for this ship.
 
@@ -40,12 +40,13 @@ def parse_input(ship: HaliteShip, board_input: np.ndarray):
     # Encode player position
     final_ship_input = [ship.position.x, ship.position.y]
     final_ship_input = final_ship_input + list(ship_input.flatten())
-    return torch.from_numpy(np.array(final_ship_input, dtype=np.float32))
+    return torch.from_numpy(np.array(final_ship_input, dtype=np.float32)).to(device)
 
 
 class HaliteShipAgent(nn.Module, metaclass=ABCMeta):
-    def __init__(self):
+    def __init__(self, device: torch.device):
         super(HaliteShipAgent, self).__init__()
+        self.device = device
         input_size = np.prod(SETTINGS["board"]["dims"]) + 2
         output_size = 6
         self.conv1 = nn.Linear(input_size, int(input_size * 1.2))
@@ -59,5 +60,5 @@ class HaliteShipAgent(nn.Module, metaclass=ABCMeta):
         return y
 
     def act(self, ship: HaliteShip, board_input: np.ndarray):
-        ship_input = parse_input(ship, board_input)
+        ship_input = parse_input(ship, board_input, device=self.device)
         return self.forward(ship_input).argmax().item()

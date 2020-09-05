@@ -11,5 +11,4 @@ dependencies:
   - flake8
   - tqdm
   - conda-forge::kaggle
-  - conda-forge::kaggle_environments
   - conda-forge::gym

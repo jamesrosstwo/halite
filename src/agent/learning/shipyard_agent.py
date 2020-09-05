@@ -15,7 +15,7 @@ SHIPYARD_ACTION_MAP = {
 }
 
 
-def parse_input(shipyard: HaliteShipyard, board_input: np.ndarray):
+def parse_input(shipyard: HaliteShipyard, board_input: np.ndarray, device="cuda"):
     """
     Parses board state to NN input for this shipyard.
 
@@ -36,7 +36,7 @@ def parse_input(shipyard: HaliteShipyard, board_input: np.ndarray):
     # Encode player position
     final_shipyard_input = [shipyard.position.x, shipyard.position.y]
     final_shipyard_input = final_shipyard_input + list(shipyard_input.flatten())
-    return torch.from_numpy(np.array(final_shipyard_input, dtype=np.float32))
+    return torch.from_numpy(np.array(final_shipyard_input, dtype=np.float32)).to(device)
 
 
 class HaliteShipyardAgent(nn.Module, metaclass=ABCMeta):
@@ -44,8 +44,9 @@ class HaliteShipyardAgent(nn.Module, metaclass=ABCMeta):
     Agent to go from state to shipyard action
     """
 
-    def __init__(self):
+    def __init__(self, device: torch.device):
         super(HaliteShipyardAgent, self).__init__()
+        self.device = device
         input_size = np.prod(SETTINGS["board"]["dims"]) + 2
         output_size = 2
         self.conv1 = nn.Linear(input_size, int(input_size * 1.2))
@@ -59,5 +60,5 @@ class HaliteShipyardAgent(nn.Module, metaclass=ABCMeta):
         return y
 
     def act(self, shipyard: HaliteShipyard, board_input: np.ndarray):
-        shipyard_input = parse_input(shipyard, board_input)
+        shipyard_input = parse_input(shipyard, board_input, device=self.device)
         return self.forward(shipyard_input).argmax().item()

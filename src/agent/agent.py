@@ -19,8 +19,8 @@ class HaliteAgent:
         from src.agent.learning.ship_agent import HaliteShipAgent, SHIP_ACTION_MAP
         from src.agent.learning.shipyard_agent import HaliteShipyardAgent, SHIPYARD_ACTION_MAP
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        ship_agent = HaliteShipAgent()
-        shipyard_agent = HaliteShipyardAgent()
+        ship_agent = HaliteShipAgent().to(device)
+        shipyard_agent = HaliteShipyardAgent().to(device)
         for ship in self.ships:
             s_action = ship_agent.act(ship, self.halite_board.map)
             ship.next_action = SHIP_ACTION_MAP[s_action]

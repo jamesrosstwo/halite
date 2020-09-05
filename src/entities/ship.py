@@ -38,11 +38,12 @@ class HaliteShip(Ship):
         self.next_action = dir
 
     def adjacent_halite_counts(self):
-        return self.cell.halite, \
-               self.cell.north.halite, \
-               self.cell.east.halite, \
-               self.cell.south.halite, \
-               self.cell.west.halite,
+        # print(self.cell.north.ship)
+        return self.cell.halite-200, \
+               self.cell.north.halite - (1000 if self.cell.north.ship is not None or self.cell.north.shipyard is not None else 0), \
+               self.cell.east.halite - (1000 if self.cell.east.ship is not None or self.cell.east.shipyard is not None else 0), \
+               self.cell.south.halite - (1000 if self.cell.south.ship is not None or self.cell.south.shipyard is not None else 0), \
+               self.cell.west.halite - (1000 if self.cell.west.ship is not None or self.cell.west.shipyard is not None else 0),
 
     def max_neighbouring_halite_dir(self):
         counts = self.adjacent_halite_counts()
@@ -51,6 +52,7 @@ class HaliteShip(Ship):
 
     def move_to_max_adjacent_halite(self):
         self.next_action = self.max_neighbouring_halite_dir()
+
 
     # Returns best direction to move from one position (fromPos) to another (toPos)
     # Example: If I'm at pos 0 and want to get to pos 55, which direction should I choose?

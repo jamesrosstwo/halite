@@ -10,7 +10,7 @@ class HaliteShipyard(Shipyard):
         return cls(shipyard_obj.id, shipyard_obj.position, shipyard_obj.player_id, shipyard_obj._board)
 
     def spawn(self):
-        pass
+        self.next_action = ShipyardAction.SPAWN
 
     @property
     def player(self):

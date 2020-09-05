@@ -1,5 +1,5 @@
 agent:
-  dir: "src"
+  dir: "src/agent"
   submission_file_name: "submission_agent.py"
   replay_memory_capacity: 20
 replay:
@@ -11,7 +11,8 @@ submit:
   export_file_name: "export.py"
 board:
   max_cell_halite: 500
-  size: [9, 21, 21]
+  dims: [9, 21, 21]
 learn:
-  dqn:
-    input_dims: [9, 21, 21]
+  batch_size: 400
+gym:
+  version: 0.1

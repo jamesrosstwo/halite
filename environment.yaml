@@ -9,4 +9,6 @@ dependencies:
   - requests
   - idna
   - flake8
+  - tqdm
   - conda-forge::kaggle
+  - conda-forge::gym

@@ -15,12 +15,12 @@ board:
   size: 21
 learn:
   batch_size: 400
-  num_episodes: 20
+  num_episodes: 50
   gamma: 0.999
   eps_start: 0.9
   eps_end: 0.05
   eps_decay: 200
   target_update: 10
-  replay_memory_capacity: 6000
+  replay_memory_capacity: 10000
 gym:
   version: 0.1

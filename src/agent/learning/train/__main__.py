@@ -7,9 +7,13 @@ from typing import Dict, Any
 ship_replay_memory = ReplayMemory(SETTINGS["learn"]["replay_memory_capacity"])
 shipyard_replay_memory = ReplayMemory(SETTINGS["learn"]["replay_memory_capacity"])
 
+steps_done = 0
+
 
 def train_agent(observation: Dict[str, Any], configuration: Dict[str, Any]) -> Dict[str, str]:
-    agent = HaliteTrainAgent(observation, configuration, ship_replay_memory, shipyard_replay_memory)
+    global steps_done
+    agent = HaliteTrainAgent(observation, configuration, ship_replay_memory, shipyard_replay_memory, steps_done)
+    steps_done += 1
     actions = agent.act()
     return actions
 

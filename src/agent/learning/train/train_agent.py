@@ -1,29 +1,46 @@
+import math
+import random
 from abc import ABCMeta
 from typing import Any
 
 from kaggle_environments.envs.halite.helpers import Dict
 from src.agent.agent import HaliteAgent
-from src.constants import TORCH_DEVICE
+from src.constants import TORCH_DEVICE, SETTINGS
 from src.agent.learning.ship_agent import HaliteShipAgent, parse_ship_input, SHIP_ACTION_MAP
 from src.agent.learning.shipyard_agent import HaliteShipyardAgent, parse_shipyard_input, SHIPYARD_ACTION_MAP
 from src.agent.learning.train.evaluator import evaluate_board
 
 
 class HaliteTrainAgent(HaliteAgent):
-    def __init__(self, observation: Dict[str, Any], configuration: Dict[str, Any], ship_memory, shipyard_memory):
+    def __init__(self, observation: Dict[str, Any], configuration: Dict[str, Any], ship_mem, shipyard_mem, n_steps):
         super().__init__(observation, configuration)
-        self.ship_memory = ship_memory
-        self.shipyard_memory = shipyard_memory
+        self.ship_memory = ship_mem
+        self.shipyard_memory = shipyard_mem
+        self.step_no = n_steps
 
     def act(self) -> Dict[str, str]:
         ship_agent = HaliteTrainShipAgent(self.ship_memory).to(TORCH_DEVICE)
         shipyard_agent = HaliteTrainShipyardAgent(self.shipyard_memory).to(TORCH_DEVICE)
+
+        e_end = SETTINGS["learn"]["eps_end"]
+        e_start = SETTINGS["learn"]["eps_start"]
+        e_decay = SETTINGS["learn"]["eps_decay"]
+        eps_threshold = e_end + (e_start - e_end) *  math.exp(-1. * self.step_no / e_decay)
+
         for ship in self.ships:
-            s_action = ship_agent.act(ship, self.halite_board)
-            ship.next_action = SHIP_ACTION_MAP[s_action]
+            sample = random.random()
+            if sample > eps_threshold:
+                s_action = ship_agent.act(ship, self.halite_board)
+                ship.next_action = SHIP_ACTION_MAP[s_action]
+            else:
+                ship.next_action = SHIP_ACTION_MAP[random.randint(0, 5)]
         for shipyard in self.shipyards:
-            s_y_action = shipyard_agent.act(shipyard, self.halite_board)
-            shipyard.next_action = SHIPYARD_ACTION_MAP[s_y_action]
+            sample = random.random()
+            if sample > eps_threshold:
+                s_y_action = shipyard_agent.act(shipyard, self.halite_board)
+                shipyard.next_action = SHIPYARD_ACTION_MAP[s_y_action]
+            else:
+                shipyard.next_action = SHIPYARD_ACTION_MAP[random.randint(0, 1)]
 
         return self.get_next_actions()
 

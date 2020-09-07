@@ -12,7 +12,13 @@ submit:
 board:
   max_cell_halite: 500
   dims: [9, 21, 21]
+  size: 21
 learn:
   batch_size: 400
+  gamma: 0.999
+  eps_start: 0.9
+  eps_end: 0.05
+  eps_decay: 200
+  target_update: 10
 gym:
   version: 0.1

@@ -7,7 +7,7 @@ if __name__ == "__main__":
     env = make("halite", debug=True)
 
     print("Running agent")
-    env.run([halite_agent, "random", "random", "random"])
+    env.run([halite_agent] * 4)
 
     print("Saving replay")
     render_options = SETTINGS["replay"]

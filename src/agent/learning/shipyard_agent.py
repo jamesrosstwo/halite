@@ -15,7 +15,7 @@ SHIPYARD_ACTION_MAP = {
 }
 
 
-def parse_input(shipyard: HaliteShipyard, board_input: np.ndarray, vision_dims=(21, 21)):
+def parse_shipyard_input(shipyard: HaliteShipyard, board_input: np.ndarray, vision_dims=(21, 21)):
     """
     Parses board state to NN input for this shipyard.
 
@@ -34,7 +34,8 @@ def parse_input(shipyard: HaliteShipyard, board_input: np.ndarray, vision_dims=(
     centered_shipyard_input = np.roll(shipyard_input, center_shift, (1, 2))
     start_y = board_center[0] - vision_dims[0] // 2
     start_x = board_center[1] - vision_dims[1] // 2
-    centered_shipyard_input = centered_shipyard_input[:, start_x:start_x + vision_dims[0], start_y:start_y + vision_dims[1]]
+    centered_shipyard_input = centered_shipyard_input[:, start_x:start_x + vision_dims[0],
+                              start_y:start_y + vision_dims[1]]
 
     final_ship_input = np.expand_dims(centered_shipyard_input, 0)
 
@@ -79,7 +80,8 @@ class HaliteShipyardAgent(nn.Module, metaclass=ABCMeta):
 
     def act(self, shipyard: HaliteShipyard, board: "HaliteBoard"):
         self.halite_board = board
-        shipyard_input = parse_input(shipyard, board.map)
+        shipyard_input = parse_shipyard_input(shipyard, board.map)
         return self.forward(shipyard_input).argmax().item()
+
 
 from src.agent.board.board import HaliteBoard

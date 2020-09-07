@@ -19,7 +19,7 @@ SHIP_ACTION_MAP = {
 }
 
 
-def parse_input(ship: HaliteShip, board_input: np.ndarray, vision_dims=(21, 21)):
+def parse_ship_input(ship: HaliteShip, board_input: np.ndarray, vision_dims=(21, 21)):
     """
     Parses board state to NN input for this ship.
 
@@ -79,7 +79,7 @@ class HaliteShipAgent(nn.Module, metaclass=ABCMeta):
 
     def act(self, ship: HaliteShip, board: "HaliteBoard"):
         self.halite_board = board
-        ship_input = parse_input(ship, board.map)
+        ship_input = parse_ship_input(ship, board.map)
         return self.forward(ship_input).argmax().item()
 
 

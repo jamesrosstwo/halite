@@ -1,7 +1,6 @@
 agent:
   dir: "src/agent"
   submission_file_name: "submission_agent.py"
-  replay_memory_capacity: 20
 replay:
   mode: "html"
   width: 800
@@ -9,10 +8,19 @@ replay:
 submit:
   export_dir: "build" # If this is changed, gitignore must be modified
   export_file_name: "export.py"
+  build_blacklist: ["src/agent/learning/train"]
 board:
   max_cell_halite: 500
   dims: [9, 21, 21]
+  size: 21
 learn:
   batch_size: 400
+  num_episodes: 20
+  gamma: 0.999
+  eps_start: 0.9
+  eps_end: 0.05
+  eps_decay: 200
+  target_update: 10
+  replay_memory_capacity: 6000
 gym:
   version: 0.1

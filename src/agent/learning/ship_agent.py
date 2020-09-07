@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
-from src.constants import SETTINGS
+from src.constants import SETTINGS, TORCH_DEVICE
 
 from kaggle_environments.envs.halite.helpers import ShipAction
 from src.agent.entities.halite_ship import HaliteShip
@@ -19,7 +19,7 @@ SHIP_ACTION_MAP = {
 }
 
 
-def parse_input(ship: HaliteShip, board_input: np.ndarray, device="cuda"):
+def parse_ship_input(ship: HaliteShip, board_input: np.ndarray, vision_dims=(21, 21)):
     """
     Parses board state to NN input for this ship.
 
@@ -27,38 +27,60 @@ def parse_input(ship: HaliteShip, board_input: np.ndarray, device="cuda"):
         - Make more complex system for ship representation, right now it's just binary
         - Make the position representation a map of nothing but the current ship?
             Not sure if having ship position as x and y integers will be understood
+    :param vision_dims: How far in each direction the ship agent can see
     :param ship: HaliteShip to get things like position to generate input
     :param board_input: Board input as np.ndarray
-    :return: 1d np.ndarray storing ship input
+    :return: 3d np.ndarray storing ship input
     """
     ship_input = board_input.copy()
-    # Current player ship layer. Removing the current
-    # ship allows the agent to more easily distinguish between
-    # Itself and other ships
-    ship_input[1, ship.position.x, ship.position.y] = 0
+    board_center = (10, 10)
+    center_shift = (ship.position.x - board_center[0], ship.position.y - board_center[1])
+    centered_ship_input = np.roll(ship_input, center_shift, (1, 2))
+    start_y = board_center[0] - vision_dims[0] // 2
+    start_x = board_center[1] - vision_dims[1] // 2
+    centered_ship_input = centered_ship_input[:, start_x:start_x + vision_dims[0], start_y:start_y + vision_dims[1]]
 
-    # Encode player position
-    final_ship_input = [ship.position.x, ship.position.y]
-    final_ship_input = final_ship_input + list(ship_input.flatten())
-    return torch.from_numpy(np.array(final_ship_input, dtype=np.float32)).to(device)
+    final_ship_input = np.expand_dims(centered_ship_input, 0)
+
+    return torch.from_numpy(final_ship_input).to(TORCH_DEVICE)
 
 
 class HaliteShipAgent(nn.Module, metaclass=ABCMeta):
-    def __init__(self, device: torch.device):
+    def __init__(self):
         super(HaliteShipAgent, self).__init__()
-        self.device = device
-        input_size = np.prod(SETTINGS["board"]["dims"]) + 2
+        input_channels = SETTINGS["board"]["dims"][0]
         output_size = 6
-        self.conv1 = nn.Linear(input_size, int(input_size * 1.2))
-        self.conv2 = nn.Linear(int(input_size * 1.2), input_size // 80)
-        self.output_layer = nn.Linear(input_size // 80, output_size)
+        self.conv1 = nn.Conv2d(in_channels=input_channels, out_channels=input_channels, kernel_size=3)
+        self.mp1 = nn.MaxPool2d(kernel_size=3)
+        self.conv2 = nn.Conv2d(input_channels, input_channels * 2, kernel_size=3)
+        self.mp2 = nn.MaxPool2d(kernel_size=2)
+        self.conv_drop = nn.Dropout2d()
+        self.fc1 = nn.Linear(77, 200)
+        self.fc2 = nn.Linear(200, output_size)
+        self.halite_board: "HaliteBoard" = None
 
     def forward(self, x):
-        y = F.relu(self.conv1(x))
-        y = F.relu(self.conv2(y))
-        y = F.relu(self.output_layer(y))
-        return y
+        in_size = x.size(0)
+        x = self.conv1(x)
+        x = F.relu(self.mp1(x))
+        x = self.conv2(x)
+        x = F.relu(self.mp2(x))
+        x = F.relu(self.conv_drop(x))
+        x = x.view(in_size, -1)
 
-    def act(self, ship: HaliteShip, board_input: np.ndarray):
-        ship_input = parse_input(ship, board_input, device=self.device)
+        additional_vals = self.halite_board.get_additional_board_vals_tensor()
+        x = torch.cat((x, additional_vals), dim=1)
+
+        x = F.relu(self.fc1(x))
+        x = F.dropout(x, training=self.training)
+        x = self.fc2(x)
+        x = F.log_softmax(x, dim=1)
+        return x
+
+    def act(self, ship: HaliteShip, board: "HaliteBoard"):
+        self.halite_board = board
+        ship_input = parse_ship_input(ship, board.map)
         return self.forward(ship_input).argmax().item()
+
+
+from src.agent.board.board import HaliteBoard

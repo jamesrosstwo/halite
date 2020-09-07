@@ -1,7 +1,9 @@
 from kaggle_environments.envs.halite.helpers import Board, Configuration, Point, Cell, PlayerId, ShipId, ShipyardId
 from typing import Dict, Any, Union, List, Tuple, Optional
 import numpy as np
-from src.constants import SETTINGS
+from src.constants import SETTINGS, TORCH_DEVICE
+import torch
+
 
 
 def pos_distance(from_pos: Point, to_pos: Point) -> float:
@@ -27,6 +29,7 @@ class HaliteBoard(Board):
         self._halite_shipyards = None
         self._halite_opponents = None
         self._halite_opponent_ships = None
+        self._halite_opponent_shipyards = None
 
         self._populate_halite_objs()
 
@@ -37,6 +40,7 @@ class HaliteBoard(Board):
         self._ordered_player_map = self.calculate_p_id_map()
 
         self.map = self.parse_map()
+        self.player_vals = self.get_additional_board_vals_tensor()
 
     @classmethod
     def from_board(cls, board: Board):
@@ -48,12 +52,13 @@ class HaliteBoard(Board):
         self._halite_shipyards = {k: HaliteShipyard.from_shipyard(v, self) for k, v in super().shipyards.items()}
         self._halite_opponents = {p_id: p for p_id, p in self._halite_players.items() if p_id != self.current_player_id}
         self._halite_opponent_ships = list(np.asarray([p.ships for p in self._halite_opponents.values()]).flatten())
+        self._halite_opponent_ships = list(np.asarray([p.shipyards for p in self._halite_opponents.values()]).flatten())
 
         for player in self._halite_players.values():
             player.set_halite_objs()
 
     @property
-    def _sorted_player_ids(self) -> List[int]:
+    def sorted_player_ids(self) -> List[int]:
         """
         The ordered player ID list. Used for parsing the board.
         :return: A list of all player IDs with the agent's player ID at index 0
@@ -68,7 +73,7 @@ class HaliteBoard(Board):
         return {v: idx for idx, v in enumerate(id_list)}
 
     def parse_map(self) -> np.ndarray:
-        out_array = np.zeros(self.dims)
+        out_array = np.zeros(self.dims, dtype=np.float32)
         cells = self.cells
         for cell in cells.values():
             out_array[:, cell.position.y, cell.position.x] = self.parse_cell(cell)
@@ -91,6 +96,16 @@ class HaliteBoard(Board):
 
     def ship_map(self, player_id) -> np.ndarray:
         return self.map[player_id + 1, :, :]
+
+    def get_additional_board_vals_tensor(self):
+        additional_board_vals = [float(self.step) / 400]
+
+        player_halite = [self.players[x].halite for x in self.sorted_player_ids]
+        p_max_halite = max(player_halite)
+        player_halite = [float(x) / p_max_halite for x in player_halite]
+
+        additional_board_vals += player_halite
+        return torch.FloatTensor([additional_board_vals]).to(TORCH_DEVICE)
 
     def ship_at_pos(self, pos: Point) -> Optional['HaliteShip']:
         cell = self.cells[pos]
@@ -132,7 +147,7 @@ class HaliteBoard(Board):
         return self._halite_shipyards
 
     @property
-    def opponents(self) -> List['HalitePlayer']:
+    def opponents(self) -> Dict[PlayerId, 'HalitePlayer']:
         return self._halite_opponents
 
     @property
@@ -141,7 +156,7 @@ class HaliteBoard(Board):
 
     @property
     def opponent_shipyards(self) -> List['HaliteShipyard']:
-        return np.flatten([p.shipyards for p in self.opponents])
+        return self._halite_opponent_shipyards
 
 
 from src.agent.entities.halite_ship import HaliteShip

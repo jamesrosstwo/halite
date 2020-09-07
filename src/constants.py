@@ -1,5 +1,6 @@
 from pathlib import Path
 import yaml
+import torch
 
 
 def load_settings(root_path):
@@ -11,3 +12,4 @@ def load_settings(root_path):
 
 ROOT_PATH = Path(__file__).resolve().parent.parent
 SETTINGS = load_settings(ROOT_PATH)
+TORCH_DEVICE = torch.device("cuda")

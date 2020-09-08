@@ -42,7 +42,11 @@ def optimize_model(network, memory: ReplayMemory):
     # Compute Q(s_t, a) - the model computes Q(s_t), then we select the
     # columns of actions taken. These are the actions which would've been taken
     # for each batch state according to policy_net
-    state_action_values = policy_net(state_batch).gather(1, action_batch)
+    state_action_values = policy_net(state_batch)
+    print(action_batch)
+    print(";;;;;")
+    print(state_action_values)
+    state_action_values = torch.gather(state_action_values, 1, action_batch)
 
     # Compute V(s_{t+1}) for all next states.
     # Expected values of actions for non_final_next_states are computed based

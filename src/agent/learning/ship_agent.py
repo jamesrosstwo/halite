@@ -87,7 +87,7 @@ class HaliteShipAgent(nn.Module, metaclass=ABCMeta):
             return feed_forward_input(board_input)
         out_tensors = []
         for state in board_input.split(desired_input_sz):
-            out_tensors.append(feed_forward_input(state))
+            out_tensors.append(feed_forward_input(state).flatten())
         return torch.stack(out_tensors)
 
     def act(self, ship: HaliteShip, board: "HaliteBoard"):
@@ -95,7 +95,7 @@ class HaliteShipAgent(nn.Module, metaclass=ABCMeta):
         return self.forward(ship_input).argmax().item()
 
     def copy(self):
-        agent_copy = HaliteShipAgent()
+        agent_copy = HaliteShipAgent().to(TORCH_DEVICE)
         agent_copy.load_state_dict(self.state_dict())
         return agent_copy
 

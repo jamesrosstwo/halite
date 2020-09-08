@@ -1,6 +1,5 @@
-import torch
 from kaggle_environments import make
-from src.constants import ROOT_PATH, SETTINGS, TORCH_DEVICE
+from src.constants import SETTINGS, TORCH_DEVICE
 from src.agent.learning.train.train_agent import HaliteTrainAgent
 from src.agent.learning.ship_agent import HaliteShipAgent
 from src.agent.learning.shipyard_agent import HaliteShipyardAgent

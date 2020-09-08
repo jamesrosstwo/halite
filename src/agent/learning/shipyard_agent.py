@@ -95,7 +95,7 @@ class HaliteShipyardAgent(nn.Module, metaclass=ABCMeta):
         return self.forward(shipyard_input).argmax().item()
 
     def copy(self):
-        agent_copy = HaliteShipyardAgent()
+        agent_copy = HaliteShipyardAgent().to(TORCH_DEVICE)
         agent_copy.load_state_dict(self.state_dict())
         return agent_copy
 

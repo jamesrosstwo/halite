@@ -1,5 +1,7 @@
 import math
 import random
+
+import numpy as np
 import torch
 from abc import ABCMeta
 from typing import Any
@@ -53,7 +55,12 @@ class HaliteTrainShipAgent(HaliteShipAgent, metaclass=ABCMeta):
 
     def act(self, ship: "HaliteShip", board: "HaliteBoard"):
         ship_input = parse_ship_input(ship, board)
-        action = self.forward(ship_input)
+        forward_res = self.forward(ship_input)
+
+        # This is super sketchy...
+        action = np.zeros(forward_res.size(1), dtype=np.int64)
+        action[forward_res.argmax().item()] = 1
+        action = torch.from_numpy(np.expand_dims(action, 0)).to(TORCH_DEVICE)
         value = torch.tensor([evaluate_board(board)], device=TORCH_DEVICE)
         self.memory.cache_state(ship.id, board.step, ship_input, action, value)
         return action.argmax().item()
@@ -66,7 +73,12 @@ class HaliteTrainShipyardAgent(HaliteShipyardAgent, metaclass=ABCMeta):
 
     def act(self, shipyard: "HaliteShipyard", board: "HaliteBoard"):
         shipyard_input = parse_shipyard_input(shipyard, board)
-        action = self.forward(shipyard_input)
+        forward_res = self.forward(shipyard_input)
+
+        # This is super sketchy...
+        action = np.zeros(forward_res.size(1), dtype=np.int64)
+        action[forward_res.argmax().item()] = 1
+        action = torch.from_numpy(np.expand_dims(action, 0)).to(TORCH_DEVICE)
         value = torch.tensor([evaluate_board(board)], device=TORCH_DEVICE)
         self.memory.cache_state(shipyard.id, board.step, shipyard_input.view(1, -1), action, value)
         return action.argmax().item()

@@ -19,7 +19,7 @@ SHIP_ACTION_MAP = {
 }
 
 
-def parse_ship_input(ship: HaliteShip, board_input: np.ndarray, vision_dims=(21, 21)):
+def parse_ship_input(ship: HaliteShip, halite_board: "HaliteBoard", vision_dims=(21, 21)):
     """
     Parses board state to NN input for this ship.
 
@@ -29,10 +29,10 @@ def parse_ship_input(ship: HaliteShip, board_input: np.ndarray, vision_dims=(21,
             Not sure if having ship position as x and y integers will be understood
     :param vision_dims: How far in each direction the ship agent can see
     :param ship: HaliteShip to get things like position to generate input
-    :param board_input: Board input as np.ndarray
+    :param halite_board: HaliteBoard to pull map data from
     :return: 3d np.ndarray storing ship input
     """
-    ship_input = board_input.copy()
+    ship_input = halite_board.map.copy()
     board_center = (10, 10)
     center_shift = (ship.position.x - board_center[0], ship.position.y - board_center[1])
     centered_ship_input = np.roll(ship_input, center_shift, (1, 2))
@@ -40,9 +40,9 @@ def parse_ship_input(ship: HaliteShip, board_input: np.ndarray, vision_dims=(21,
     start_x = board_center[1] - vision_dims[1] // 2
     centered_ship_input = centered_ship_input[:, start_x:start_x + vision_dims[0], start_y:start_y + vision_dims[1]]
 
-    final_ship_input = np.expand_dims(centered_ship_input, 0)
-
-    return torch.from_numpy(final_ship_input).to(TORCH_DEVICE)
+    centered_ship_input = np.concatenate((centered_ship_input.flatten(), halite_board.additional_vals), axis=0)
+    centered_ship_input = centered_ship_input.astype(np.float32)
+    return torch.from_numpy(centered_ship_input).to(TORCH_DEVICE)
 
 
 class HaliteShipAgent(nn.Module, metaclass=ABCMeta):
@@ -57,30 +57,47 @@ class HaliteShipAgent(nn.Module, metaclass=ABCMeta):
         self.conv_drop = nn.Dropout2d()
         self.fc1 = nn.Linear(77, 200)
         self.fc2 = nn.Linear(200, output_size)
-        self.halite_board: "HaliteBoard" = None
 
-    def forward(self, x):
-        in_size = x.size(0)
-        x = self.conv1(x)
-        x = F.relu(self.mp1(x))
-        x = self.conv2(x)
-        x = F.relu(self.mp2(x))
-        x = F.relu(self.conv_drop(x))
-        x = x.view(in_size, -1)
+    def forward(self, board_input):
+        add_vals_size = SETTINGS["learn"]["num_additional_vals"]
+        board_input_dims = SETTINGS["board"]["dims"]
 
-        additional_vals = self.halite_board.get_additional_board_vals_tensor()
-        x = torch.cat((x, additional_vals), dim=1)
+        def feed_forward_input(fwd_input):
+            additional_vals, x = fwd_input.split([add_vals_size, fwd_input.size(0) - add_vals_size])
+            additional_vals = additional_vals.view(1, -1)
+            x = x.view(1, *board_input_dims)
 
-        x = F.relu(self.fc1(x))
-        x = F.dropout(x, training=self.training)
-        x = self.fc2(x)
-        x = F.log_softmax(x, dim=1)
-        return x
+            in_size = x.size(0)
+            x = self.conv1(x)
+            x = F.relu(self.mp1(x))
+            x = self.conv2(x)
+            x = F.relu(self.mp2(x))
+            x = F.relu(self.conv_drop(x))
+            x = x.view(in_size, -1)
+
+            x = torch.cat((x, additional_vals), dim=1)
+            x = F.relu(self.fc1(x))
+            x = F.dropout(x, training=self.training)
+            x = self.fc2(x)
+            x = F.log_softmax(x, dim=1)
+            return x
+
+        desired_input_sz = int(np.prod(board_input_dims) + add_vals_size)
+        if board_input.size(0) == desired_input_sz:
+            return feed_forward_input(board_input)
+        out_tensors = []
+        for state in board_input.split(desired_input_sz):
+            out_tensors.append(feed_forward_input(state))
+        return torch.stack(out_tensors)
 
     def act(self, ship: HaliteShip, board: "HaliteBoard"):
-        self.halite_board = board
-        ship_input = parse_ship_input(ship, board.map)
+        ship_input = parse_ship_input(ship, board)
         return self.forward(ship_input).argmax().item()
+
+    def copy(self):
+        agent_copy = HaliteShipAgent()
+        agent_copy.load_state_dict(self.state_dict())
+        return agent_copy
 
 
 from src.agent.board.board import HaliteBoard

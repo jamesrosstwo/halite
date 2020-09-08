@@ -1,5 +1,6 @@
 import math
 import random
+import torch
 from abc import ABCMeta
 from typing import Any
 
@@ -25,7 +26,7 @@ class HaliteTrainAgent(HaliteAgent):
         e_end = SETTINGS["learn"]["eps_end"]
         e_start = SETTINGS["learn"]["eps_start"]
         e_decay = SETTINGS["learn"]["eps_decay"]
-        eps_threshold = e_end + (e_start - e_end) *  math.exp(-1. * self.step_no / e_decay)
+        eps_threshold = e_end + (e_start - e_end) * math.exp(-1. * self.step_no / e_decay)
 
         for ship in self.ships:
             sample = random.random()
@@ -51,11 +52,11 @@ class HaliteTrainShipAgent(HaliteShipAgent, metaclass=ABCMeta):
         self.memory = memory
 
     def act(self, ship: "HaliteShip", board: "HaliteBoard"):
-        self.halite_board = board
-        ship_input = parse_ship_input(ship, board.map)
-        action = self.forward(ship_input).argmax().item()
-        self.memory.cache_state(ship.id, board.step, ship_input, action, evaluate_board(board))
-        return action
+        ship_input = parse_ship_input(ship, board)
+        action = self.forward(ship_input)
+        value = torch.tensor([evaluate_board(board)], device=TORCH_DEVICE)
+        self.memory.cache_state(ship.id, board.step, ship_input, action, value)
+        return action.argmax().item()
 
 
 class HaliteTrainShipyardAgent(HaliteShipyardAgent, metaclass=ABCMeta):
@@ -64,11 +65,11 @@ class HaliteTrainShipyardAgent(HaliteShipyardAgent, metaclass=ABCMeta):
         self.memory = memory
 
     def act(self, shipyard: "HaliteShipyard", board: "HaliteBoard"):
-        self.halite_board = board
-        shipyard_input = parse_shipyard_input(shipyard, board.map)
-        action = self.forward(shipyard_input).argmax().item()
-        self.memory.cache_state(shipyard.id, board.step, shipyard_input, action, evaluate_board(board))
-        return action
+        shipyard_input = parse_shipyard_input(shipyard, board)
+        action = self.forward(shipyard_input)
+        value = torch.tensor([evaluate_board(board)], device=TORCH_DEVICE)
+        self.memory.cache_state(shipyard.id, board.step, shipyard_input.view(1, -1), action, value)
+        return action.argmax().item()
 
 
 from src.agent.entities.halite_ship import HaliteShip

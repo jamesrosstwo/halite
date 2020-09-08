@@ -15,7 +15,7 @@ SHIPYARD_ACTION_MAP = {
 }
 
 
-def parse_shipyard_input(shipyard: HaliteShipyard, board_input: np.ndarray, vision_dims=(21, 21)):
+def parse_shipyard_input(shipyard: HaliteShipyard, halite_board: "HaliteBoard", vision_dims=(21, 21)):
     """
     Parses board state to NN input for this shipyard.
 
@@ -24,11 +24,11 @@ def parse_shipyard_input(shipyard: HaliteShipyard, board_input: np.ndarray, visi
         - Make the position representation a map of nothing but the current shipyard?
             Not sure if having shipyard position as x and y integers will be understood
     :param shipyard: HaliteShipyard to get things like position to generate input
-    :param board_input: Board input as np.ndarray
+    :param halite_board: HaliteBoard to pull map data from
     :param vision_dims: How far in each direction the shipyard agent can see
     :return: 1d np.ndarray storing shipyard input
     """
-    shipyard_input = board_input.copy()
+    shipyard_input = halite_board.map.copy()
     board_center = (10, 10)
     center_shift = (shipyard.position.x - board_center[0], shipyard.position.y - board_center[1])
     centered_shipyard_input = np.roll(shipyard_input, center_shift, (1, 2))
@@ -36,10 +36,9 @@ def parse_shipyard_input(shipyard: HaliteShipyard, board_input: np.ndarray, visi
     start_x = board_center[1] - vision_dims[1] // 2
     centered_shipyard_input = centered_shipyard_input[:, start_x:start_x + vision_dims[0],
                               start_y:start_y + vision_dims[1]]
-
-    final_ship_input = np.expand_dims(centered_shipyard_input, 0)
-
-    return torch.from_numpy(final_ship_input).to(TORCH_DEVICE)
+    centered_shipyard_input = np.concatenate((centered_shipyard_input.flatten(), halite_board.additional_vals), axis=0)
+    centered_shipyard_input = centered_shipyard_input.astype(np.float32)
+    return torch.from_numpy(centered_shipyard_input).to(TORCH_DEVICE)
 
 
 class HaliteShipyardAgent(nn.Module, metaclass=ABCMeta):
@@ -58,30 +57,47 @@ class HaliteShipyardAgent(nn.Module, metaclass=ABCMeta):
         self.conv_drop = nn.Dropout2d()
         self.fc1 = nn.Linear(77, 200)
         self.fc2 = nn.Linear(200, output_size)
-        self.halite_board: "HaliteBoard" = None
 
-    def forward(self, x):
-        in_size = x.size(0)
-        x = self.conv1(x)
-        x = F.relu(self.mp1(x))
-        x = self.conv2(x)
-        x = F.relu(self.mp2(x))
-        x = F.relu(self.conv_drop(x))
-        x = x.view(in_size, -1)
+    def forward(self, board_input):
+        add_vals_size = SETTINGS["learn"]["num_additional_vals"]
+        board_input_dims = SETTINGS["board"]["dims"]
 
-        additional_vals = self.halite_board.get_additional_board_vals_tensor()
-        x = torch.cat((x, additional_vals), dim=1)
+        def feed_forward_input(fwd_input):
+            additional_vals, x = fwd_input.split([add_vals_size, fwd_input.size(0) - add_vals_size])
+            additional_vals = additional_vals.view(1, -1)
+            x = x.view(1, *board_input_dims)
 
-        x = F.relu(self.fc1(x))
-        x = F.dropout(x, training=self.training)
-        x = self.fc2(x)
-        x = F.log_softmax(x, dim=1)
-        return x
+            in_size = x.size(0)
+            x = self.conv1(x)
+            x = F.relu(self.mp1(x))
+            x = self.conv2(x)
+            x = F.relu(self.mp2(x))
+            x = F.relu(self.conv_drop(x))
+            x = x.view(in_size, -1)
+
+            x = torch.cat((x, additional_vals), dim=1)
+            x = F.relu(self.fc1(x))
+            x = F.dropout(x, training=self.training)
+            x = self.fc2(x)
+            x = F.log_softmax(x, dim=1)
+            return x
+
+        desired_input_sz = int(np.prod(board_input_dims) + add_vals_size)
+        if board_input.size(0) == desired_input_sz:
+            return feed_forward_input(board_input)
+        out_tensors = []
+        for state in board_input.split(desired_input_sz):
+            out_tensors.append(feed_forward_input(state))
+        return torch.stack(out_tensors)
 
     def act(self, shipyard: HaliteShipyard, board: "HaliteBoard"):
-        self.halite_board = board
-        shipyard_input = parse_shipyard_input(shipyard, board.map)
+        shipyard_input = parse_shipyard_input(shipyard, board)
         return self.forward(shipyard_input).argmax().item()
+
+    def copy(self):
+        agent_copy = HaliteShipyardAgent()
+        agent_copy.load_state_dict(self.state_dict())
+        return agent_copy
 
 
 from src.agent.board.board import HaliteBoard

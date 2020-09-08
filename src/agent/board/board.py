@@ -40,7 +40,7 @@ class HaliteBoard(Board):
         self._ordered_player_map = self.calculate_p_id_map()
 
         self.map = self.parse_map()
-        self.player_vals = self.get_additional_board_vals_tensor()
+        self.additional_vals = self.get_additional_board_vals()
 
     @classmethod
     def from_board(cls, board: Board):
@@ -97,7 +97,7 @@ class HaliteBoard(Board):
     def ship_map(self, player_id) -> np.ndarray:
         return self.map[player_id + 1, :, :]
 
-    def get_additional_board_vals_tensor(self):
+    def get_additional_board_vals(self):
         additional_board_vals = [float(self.step) / 400]
 
         player_halite = [self.players[x].halite for x in self.sorted_player_ids]
@@ -105,7 +105,7 @@ class HaliteBoard(Board):
         player_halite = [float(x) / p_max_halite for x in player_halite]
 
         additional_board_vals += player_halite
-        return torch.FloatTensor([additional_board_vals]).to(TORCH_DEVICE)
+        return np.array(additional_board_vals)
 
     def ship_at_pos(self, pos: Point) -> Optional['HaliteShip']:
         cell = self.cells[pos]

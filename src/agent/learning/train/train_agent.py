@@ -57,10 +57,7 @@ class HaliteTrainShipAgent(HaliteShipAgent, metaclass=ABCMeta):
         ship_input = parse_ship_input(ship, board)
         forward_res = self.forward(ship_input)
 
-        # This is super sketchy...
-        action = np.zeros(forward_res.size(1), dtype=np.int64)
-        action[forward_res.argmax().item()] = 1
-        action = torch.from_numpy(np.expand_dims(action, 0)).to(TORCH_DEVICE)
+        action = torch.tensor([forward_res.argmax().item()], device=TORCH_DEVICE)
         value = torch.tensor([evaluate_board(board)], device=TORCH_DEVICE)
         self.memory.cache_state(ship.id, board.step, ship_input, action, value)
         return action.argmax().item()
@@ -75,12 +72,9 @@ class HaliteTrainShipyardAgent(HaliteShipyardAgent, metaclass=ABCMeta):
         shipyard_input = parse_shipyard_input(shipyard, board)
         forward_res = self.forward(shipyard_input)
 
-        # This is super sketchy...
-        action = np.zeros(forward_res.size(1), dtype=np.int64)
-        action[forward_res.argmax().item()] = 1
-        action = torch.from_numpy(np.expand_dims(action, 0)).to(TORCH_DEVICE)
+        action = torch.tensor([forward_res.argmax().item()], device=TORCH_DEVICE)
         value = torch.tensor([evaluate_board(board)], device=TORCH_DEVICE)
-        self.memory.cache_state(shipyard.id, board.step, shipyard_input.view(1, -1), action, value)
+        self.memory.cache_state(shipyard.id, board.step, shipyard_input, action, value)
         return action.argmax().item()
 
 

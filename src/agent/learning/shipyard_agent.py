@@ -87,7 +87,7 @@ class HaliteShipyardAgent(nn.Module, metaclass=ABCMeta):
             return feed_forward_input(board_input)
         out_tensors = []
         for state in board_input.split(desired_input_sz):
-            out_tensors.append(feed_forward_input(state))
+            out_tensors.append(torch.flatten(feed_forward_input(state)))
         return torch.stack(out_tensors)
 
     def act(self, shipyard: HaliteShipyard, board: "HaliteBoard"):

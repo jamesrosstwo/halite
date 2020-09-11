@@ -1,10 +1,8 @@
 from collections import namedtuple
 
 import torch
-import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
-import torchvision.transforms as T
 
 from src.agent.learning.train.memory import ReplayMemory
 from src.constants import SETTINGS, TORCH_DEVICE
@@ -36,17 +34,16 @@ def optimize_model(network, memory: ReplayMemory):
     non_final_next_states = torch.cat([s for s in batch.next_state
                                        if s is not None])
     state_batch = torch.cat(batch.state)
-    action_batch = torch.cat(batch.action)
+    action_batch = torch.stack(batch.action)
     reward_batch = torch.cat(batch.reward)
 
     # Compute Q(s_t, a) - the model computes Q(s_t), then we select the
     # columns of actions taken. These are the actions which would've been taken
     # for each batch state according to policy_net
+
     state_action_values = policy_net(state_batch)
-    print(action_batch)
-    print(";;;;;")
-    print(state_action_values)
     state_action_values = torch.gather(state_action_values, 1, action_batch)
+
 
     # Compute V(s_{t+1}) for all next states.
     # Expected values of actions for non_final_next_states are computed based

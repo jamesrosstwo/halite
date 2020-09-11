@@ -18,7 +18,8 @@ def train_agent(observation: Dict[str, Any], configuration: Dict[str, Any]) -> D
     global steps_done
     agent = HaliteTrainAgent(observation, configuration, ship_replay_memory, shipyard_replay_memory, steps_done)
     steps_done += 1
-    print(steps_done)
+    if steps_done % 50 == 0:
+        print("#", end="")
     actions = agent.act()
     return actions
 
@@ -30,10 +31,11 @@ for i in range(SETTINGS["learn"]["num_train_episodes"]):
     print("Training step", i)
     print("Generating transition information")
     env.run([train_agent, "random", "random", "random"])
+    print()
     print("Saving transition information")
     ship_replay_memory.push_cache()
     shipyard_replay_memory.push_cache()
     print("Ship agent optimization step")
-    optimize_model(HaliteShipAgent().to(TORCH_DEVICE), ship_replay_memory)
+    optimize_model(HaliteShipAgent().to(TORCH_DEVICE), ship_replay_memory, "ship_agent")
     print("Shipyard agent optimization step")
-    optimize_model(HaliteShipyardAgent().to(TORCH_DEVICE), shipyard_replay_memory)
+    optimize_model(HaliteShipyardAgent().to(TORCH_DEVICE), shipyard_replay_memory, "shipyard_agent")

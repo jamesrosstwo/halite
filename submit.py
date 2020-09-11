@@ -35,8 +35,8 @@ if __name__ == "__main__":
     SHIP_AGENT_B64_STRING = model_file_to_b64(_ship_agent_model_path)
     SHIPYARD_AGENT_B64_STRING = model_file_to_b64(_shipyard_agent_model_path)
 
-    ship_agent_str = "SHIP_AGENT_B64_STRING = " + str(SHIP_AGENT_B64_STRING)[2:-1]
-    shipyard_agent_str = "SHIPYARD_AGENT_B64_STRING = " + str(SHIPYARD_AGENT_B64_STRING)[2:-1]
+    ship_agent_str = "SHIP_AGENT_B64_STRING = " + str(SHIP_AGENT_B64_STRING)
+    shipyard_agent_str = "SHIPYARD_AGENT_B64_STRING = " + str(SHIPYARD_AGENT_B64_STRING)
     module_text = [settings_str, ship_agent_str, shipyard_agent_str, torch_import_str, torch_device_str, ship_agent_dict_str,
                    shipyard_agent_dict_str]
 

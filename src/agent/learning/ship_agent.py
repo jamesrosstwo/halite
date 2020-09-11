@@ -108,7 +108,6 @@ class HaliteShipAgent(nn.Module, metaclass=ABCMeta):
         # Write to temp file for kaggle submission
         with open("model.dat", "wb") as f:
             f.write(base64.b64decode(base64_str))
-            f.close()
         self.load_state_dict(torch.load('model.dat'))
 
 

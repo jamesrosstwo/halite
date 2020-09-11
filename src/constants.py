@@ -3,6 +3,8 @@ from pathlib import Path
 import yaml
 import torch
 
+from submit import model_file_to_b64
+
 
 def load_settings(root_path):
     with open(root_path / "settings.yaml") as file:
@@ -27,6 +29,9 @@ _ship_agent_model_path = _model_path / SETTINGS["learn"]["models"]["ship_agent_f
 _shipyard_agent_model_path = _model_path / SETTINGS["learn"]["models"]["shipyard_agent_file"]
 SHIP_AGENT_STATE_DICT = torch.load(_ship_agent_model_path)
 SHIPYARD_AGENT_STATE_DICT = torch.load(_shipyard_agent_model_path)
-SHIP_AGENT_B64_STRING = ""
-SHIPYARD_AGENT_B64_STRING = ""
+SHIP_AGENT_B64_STRING = model_file_to_b64(_ship_agent_model_path)
+SHIPYARD_AGENT_B64_STRING = model_file_to_b64(_shipyard_agent_model_path)
+
+SHIP_AGENT_B64_STRING = str(SHIP_AGENT_B64_STRING)[2:-1]
+SHIPYARD_AGENT_B64_STRING = str(SHIPYARD_AGENT_B64_STRING)[2:-1]
 TORCH_DEVICE = torch.device("cuda")

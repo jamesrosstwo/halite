@@ -77,10 +77,6 @@ class HaliteTrainShipyardAgent(HaliteShipyardAgent, metaclass=ABCMeta):
         self.memory.cache_state(shipyard.id, board.step, shipyard_input, action, value)
         return action.argmax().item()
 
-    def load_recent_model(self):
-        pass
-
-
 from src.agent.entities.halite_ship import HaliteShip
 from src.agent.entities.halite_shipyard import HaliteShipyard
 from src.agent.board.board import HaliteBoard

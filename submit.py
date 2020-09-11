@@ -1,11 +1,18 @@
+import base64
 import json
 import os
 from pathlib import Path
-from src.constants import ROOT_PATH, SETTINGS
+
+from src.constants import *
+
 
 # Nothing about this is good, but unfortunately this has to be compiled into one script for submission.
 # There is a bug where if the files are in the wrong order in the directory, the imports will be broken and won't work.
 # Need something like import_priority for each file to determine order to place in export script
+
+def model_file_to_b64(state_dict_path):
+    with open(state_dict_path, 'rb') as f:
+        return base64.b64encode(f.read())
 
 
 if __name__ == "__main__":
@@ -15,12 +22,31 @@ if __name__ == "__main__":
     module_export_path = module_export_dir / SETTINGS["submit"]["export_file_name"]
     module_export_path.touch(exist_ok=True)
 
+    SETTINGS["mode"] = "submit"
     settings_str = "SETTINGS = " + str(json.dumps(SETTINGS))
-    module_text = [settings_str]
+    torch_import_str = "import torch"
+    torch_device_str = "TORCH_DEVICE = torch.device('cpu')"
+    ship_agent_dict_str = "SHIP_AGENT_STATE_DICT = None"
+    shipyard_agent_dict_str = "SHIPYARD_AGENT_STATE_DICT = None"
+
+    _model_path = ROOT_PATH / SETTINGS["learn"]["models"]["save_dir"]
+    _ship_agent_model_path = _model_path / SETTINGS["learn"]["models"]["ship_agent_file"]
+    _shipyard_agent_model_path = _model_path / SETTINGS["learn"]["models"]["shipyard_agent_file"]
+    SHIP_AGENT_B64_STRING = model_file_to_b64(_ship_agent_model_path)
+    SHIPYARD_AGENT_B64_STRING = model_file_to_b64(_shipyard_agent_model_path)
+
+    ship_agent_str = "SHIP_AGENT_B64_STRING = " + str(SHIP_AGENT_B64_STRING)[2:-1]
+    shipyard_agent_str = "SHIPYARD_AGENT_B64_STRING = " + str(SHIPYARD_AGENT_B64_STRING)[2:-1]
+    module_text = [settings_str, ship_agent_str, shipyard_agent_str, torch_import_str, torch_device_str, ship_agent_dict_str,
+                   shipyard_agent_dict_str]
+
+    path_blacklist = [ROOT_PATH / x for x in SETTINGS["submit"]["build_blacklist"]]
 
     for root, dirs, files in os.walk(str(ROOT_PATH / (SETTINGS["agent"]["dir"])), topdown=False):
         for name in files:
             p = Path(root) / name
+            if any([x in p.parents for x in path_blacklist]):
+                continue
             if p.is_file():
                 if name == SETTINGS["agent"]["submission_file_name"]:
                     continue

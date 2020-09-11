@@ -27,5 +27,7 @@ learn:
     save_dir: "models"
     ship_agent_file: "ship_agent.pt"
     shipyard_agent_file: "shipyard_agent.pt"
+    submission_model_dir: "submit"
 gym:
   version: 0.1
+mode: "submit"

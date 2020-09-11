@@ -1,3 +1,4 @@
+import base64
 from abc import ABCMeta
 
 import torch
@@ -102,6 +103,13 @@ class HaliteShipyardAgent(nn.Module, metaclass=ABCMeta):
 
     def load_recent_model(self):
         self.load_state_dict(SHIPYARD_AGENT_STATE_DICT)
+
+    def load_base64(self, base64_str):
+        # Write to temp file for kaggle submission
+        with open("model.dat", "wb") as f:
+            f.write(base64.b64decode(base64_str))
+            f.close()
+        return torch.load('model.dat')
 
 
 from src.agent.board.board import HaliteBoard

@@ -1,6 +1,6 @@
 from kaggle_environments.envs.halite.helpers import Dict, Any
 from src.agent.board.board import HaliteBoard
-from src.constants import TORCH_DEVICE
+from src.constants import TORCH_DEVICE, SETTINGS, SHIP_AGENT_B64_STRING, SHIPYARD_AGENT_B64_STRING
 
 
 class HaliteAgent:
@@ -19,8 +19,12 @@ class HaliteAgent:
         from src.agent.learning.shipyard_agent import HaliteShipyardAgent, SHIPYARD_ACTION_MAP
         ship_agent = HaliteShipAgent().to(TORCH_DEVICE)
         shipyard_agent = HaliteShipyardAgent().to(TORCH_DEVICE)
-        shipyard_agent.load_recent_model()
-        shipyard_agent.load_recent_model()
+        if SETTINGS["mode"] == "submit":
+            ship_agent.load_base64(SHIP_AGENT_B64_STRING)
+            shipyard_agent.load_base64(SHIPYARD_AGENT_B64_STRING)
+        else:
+            shipyard_agent.load_recent_model()
+            shipyard_agent.load_recent_model()
         for ship in self.ships:
             s_action = ship_agent.act(ship, self.halite_board)
             ship.next_action = SHIP_ACTION_MAP[s_action]

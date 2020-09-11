@@ -1,3 +1,4 @@
+import base64
 from abc import ABCMeta
 
 import torch
@@ -61,7 +62,6 @@ class HaliteShipAgent(nn.Module, metaclass=ABCMeta):
         self.fc2 = nn.Linear(200, output_size)
 
     def forward(self, board_input):
-
         board_input_dims = SETTINGS["board"]["dims"]
 
         def feed_forward_input(fwd_input):
@@ -103,6 +103,13 @@ class HaliteShipAgent(nn.Module, metaclass=ABCMeta):
 
     def load_recent_model(self):
         self.load_state_dict(SHIP_AGENT_STATE_DICT)
+
+    def load_base64(self, base64_str):
+        # Write to temp file for kaggle submission
+        with open("model.dat", "wb") as f:
+            f.write(base64.b64decode(base64_str))
+            f.close()
+        self.load_state_dict(torch.load('model.dat'))
 
 
 from src.agent.board.board import HaliteBoard

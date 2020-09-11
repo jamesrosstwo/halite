@@ -6,7 +6,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 
 from src.agent.learning.train.memory import ReplayMemory
-from src.constants import SETTINGS, TORCH_DEVICE, ROOT_PATH
+from src.constants import SETTINGS, TORCH_DEVICE
 
 Transition = namedtuple('Transition', ('state', 'action', 'next_state', 'reward'))
 
@@ -14,7 +14,7 @@ BATCH_SIZE = SETTINGS["learn"]["batch_size"]
 GAMMA = SETTINGS["learn"]["gamma"]
 
 
-def optimize_model(network, memory: ReplayMemory, model_name: str):
+def optimize_model(network, memory: ReplayMemory, model_path: str):
     policy_net = network
     target_net = network.copy()
     target_net.eval()
@@ -64,4 +64,4 @@ def optimize_model(network, memory: ReplayMemory, model_name: str):
     for param in policy_net.parameters():
         param.grad.data.clamp_(-1, 1)
     optimizer.step()
-    torch.save(policy_net.state_dict(), ROOT_PATH / "models" / model_name)
+    torch.save(policy_net.state_dict(), model_path)

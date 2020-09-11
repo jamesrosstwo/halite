@@ -19,6 +19,8 @@ class HaliteAgent:
         from src.agent.learning.shipyard_agent import HaliteShipyardAgent, SHIPYARD_ACTION_MAP
         ship_agent = HaliteShipAgent().to(TORCH_DEVICE)
         shipyard_agent = HaliteShipyardAgent().to(TORCH_DEVICE)
+        shipyard_agent.load_recent_model()
+        shipyard_agent.load_recent_model()
         for ship in self.ships:
             s_action = ship_agent.act(ship, self.halite_board)
             ship.next_action = SHIP_ACTION_MAP[s_action]

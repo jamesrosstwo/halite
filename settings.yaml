@@ -14,8 +14,8 @@ board:
   dims: [9, 21, 21]
   size: 21
 learn:
-  batch_size: 150
-  num_train_episodes: 100
+  batch_size: 250
+  num_train_episodes: 10000
   gamma: 0.999
   eps_start: 0.9
   eps_end: 0.05
@@ -23,5 +23,9 @@ learn:
   target_update: 10
   replay_memory_capacity: 10000
   num_additional_vals: 5
+  models:
+    save_dir: "models"
+    ship_agent_file: "ship_agent.pt"
+    shipyard_agent_file: "shipyard_agent.pt"
 gym:
   version: 0.1

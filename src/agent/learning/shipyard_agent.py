@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
-from src.constants import SETTINGS, TORCH_DEVICE
+from src.constants import SETTINGS, TORCH_DEVICE, SHIPYARD_AGENT_STATE_DICT
 
 from src.agent.entities.halite_shipyard import HaliteShipyard
 from kaggle_environments.envs.halite.helpers import ShipyardAction
@@ -48,11 +48,12 @@ class HaliteShipyardAgent(nn.Module, metaclass=ABCMeta):
 
     def __init__(self):
         super(HaliteShipyardAgent, self).__init__()
-        input_channels = SETTINGS["board"]["dims"][0]
+        self.input_channels = SETTINGS["board"]["dims"][0]
+        self.vision_dims = (21, 21)
         output_size = 2
-        self.conv1 = nn.Conv2d(in_channels=input_channels, out_channels=input_channels, kernel_size=3)
+        self.conv1 = nn.Conv2d(in_channels=self.input_channels, out_channels=self.input_channels, kernel_size=3)
         self.mp1 = nn.MaxPool2d(kernel_size=3)
-        self.conv2 = nn.Conv2d(input_channels, input_channels * 2, kernel_size=3)
+        self.conv2 = nn.Conv2d(self.input_channels, self.input_channels * 2, kernel_size=3)
         self.mp2 = nn.MaxPool2d(kernel_size=2)
         self.conv_drop = nn.Dropout2d()
         self.fc1 = nn.Linear(77, 200)
@@ -65,7 +66,7 @@ class HaliteShipyardAgent(nn.Module, metaclass=ABCMeta):
         def feed_forward_input(fwd_input):
             additional_vals, x = fwd_input.split([add_vals_size, fwd_input.size(0) - add_vals_size])
             additional_vals = additional_vals.view(1, -1)
-            x = x.view(1, *board_input_dims)
+            x = x.view(1, self.input_channels, *self.vision_dims)
 
             in_size = x.size(0)
             x = self.conv1(x)
@@ -91,13 +92,16 @@ class HaliteShipyardAgent(nn.Module, metaclass=ABCMeta):
         return torch.stack(out_tensors)
 
     def act(self, shipyard: HaliteShipyard, board: "HaliteBoard"):
-        shipyard_input = parse_shipyard_input(shipyard, board)
+        shipyard_input = parse_shipyard_input(shipyard, board, self.vision_dims)
         return self.forward(shipyard_input).argmax().item()
 
     def copy(self):
         agent_copy = HaliteShipyardAgent().to(TORCH_DEVICE)
         agent_copy.load_state_dict(self.state_dict())
         return agent_copy
+
+    def load_recent_model(self):
+        self.load_state_dict(SHIPYARD_AGENT_STATE_DICT)
 
 
 from src.agent.board.board import HaliteBoard

@@ -1,5 +1,5 @@
 from kaggle_environments import make
-from src.constants import SETTINGS, TORCH_DEVICE
+from src.constants import SETTINGS, TORCH_DEVICE, ROOT_PATH
 from src.agent.learning.train.train_agent import HaliteTrainAgent
 from src.agent.learning.ship_agent import HaliteShipAgent
 from src.agent.learning.shipyard_agent import HaliteShipyardAgent
@@ -27,6 +27,12 @@ def train_agent(observation: Dict[str, Any], configuration: Dict[str, Any]) -> D
 print("Making environment")
 env = make("halite", debug=True)
 
+ship_agent = HaliteShipAgent().to(TORCH_DEVICE)
+shipyard_agent = HaliteShipyardAgent().to(TORCH_DEVICE)
+
+# ship_agent.load_recent_model()
+# shipyard_agent.load_recent_model()
+
 for i in range(SETTINGS["learn"]["num_train_episodes"]):
     print("Training step", i)
     print("Generating transition information")
@@ -36,6 +42,9 @@ for i in range(SETTINGS["learn"]["num_train_episodes"]):
     ship_replay_memory.push_cache()
     shipyard_replay_memory.push_cache()
     print("Ship agent optimization step")
-    optimize_model(HaliteShipAgent().to(TORCH_DEVICE), ship_replay_memory, "ship_agent")
+    model_path = ROOT_PATH / SETTINGS["learn"]["models"]["save_dir"]
+    ship_agent_model_path = model_path / SETTINGS["learn"]["models"]["ship_agent_file"]
+    shipyard_agent_model_path = model_path / SETTINGS["learn"]["models"]["shipyard_agent_file"]
+    optimize_model(ship_agent, ship_replay_memory, ship_agent_model_path)
     print("Shipyard agent optimization step")
-    optimize_model(HaliteShipyardAgent().to(TORCH_DEVICE), shipyard_replay_memory, "shipyard_agent")
+    optimize_model(shipyard_agent, shipyard_replay_memory, shipyard_agent_model_path)

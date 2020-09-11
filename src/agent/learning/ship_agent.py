@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
-from src.constants import SETTINGS, TORCH_DEVICE
+from src.constants import SETTINGS, TORCH_DEVICE, SHIP_AGENT_STATE_DICT
 
 from kaggle_environments.envs.halite.helpers import ShipAction
 from src.agent.entities.halite_ship import HaliteShip
@@ -48,24 +48,26 @@ def parse_ship_input(ship: HaliteShip, halite_board: "HaliteBoard", vision_dims=
 class HaliteShipAgent(nn.Module, metaclass=ABCMeta):
     def __init__(self):
         super(HaliteShipAgent, self).__init__()
-        input_channels = SETTINGS["board"]["dims"][0]
+        self.input_channels = SETTINGS["board"]["dims"][0]
+        self.vision_dims = (21, 21)
+        self.add_vals_size = SETTINGS["learn"]["num_additional_vals"]
         output_size = 6
-        self.conv1 = nn.Conv2d(in_channels=input_channels, out_channels=input_channels, kernel_size=3)
+        self.conv1 = nn.Conv2d(in_channels=self.input_channels, out_channels=self.input_channels, kernel_size=3)
         self.mp1 = nn.MaxPool2d(kernel_size=3)
-        self.conv2 = nn.Conv2d(input_channels, input_channels * 2, kernel_size=3)
+        self.conv2 = nn.Conv2d(self.input_channels, self.input_channels * 2, kernel_size=3)
         self.mp2 = nn.MaxPool2d(kernel_size=2)
         self.conv_drop = nn.Dropout2d()
         self.fc1 = nn.Linear(77, 200)
         self.fc2 = nn.Linear(200, output_size)
 
     def forward(self, board_input):
-        add_vals_size = SETTINGS["learn"]["num_additional_vals"]
+
         board_input_dims = SETTINGS["board"]["dims"]
 
         def feed_forward_input(fwd_input):
-            additional_vals, x = fwd_input.split([add_vals_size, fwd_input.size(0) - add_vals_size])
+            additional_vals, x = fwd_input.split([self.add_vals_size, fwd_input.size(0) - self.add_vals_size])
             additional_vals = additional_vals.view(1, -1)
-            x = x.view(1, *board_input_dims)
+            x = x.view(1, self.input_channels, *self.vision_dims)
 
             in_size = x.size(0)
             x = self.conv1(x)
@@ -82,7 +84,7 @@ class HaliteShipAgent(nn.Module, metaclass=ABCMeta):
             x = F.log_softmax(x, dim=1)
             return x
 
-        desired_input_sz = int(np.prod(board_input_dims) + add_vals_size)
+        desired_input_sz = int(np.prod(board_input_dims) + self.add_vals_size)
         if board_input.size(0) == desired_input_sz:
             return feed_forward_input(board_input)
         out_tensors = []
@@ -91,13 +93,16 @@ class HaliteShipAgent(nn.Module, metaclass=ABCMeta):
         return torch.stack(out_tensors)
 
     def act(self, ship: HaliteShip, board: "HaliteBoard"):
-        ship_input = parse_ship_input(ship, board)
+        ship_input = parse_ship_input(ship, board, self.vision_dims)
         return self.forward(ship_input).argmax().item()
 
     def copy(self):
         agent_copy = HaliteShipAgent().to(TORCH_DEVICE)
         agent_copy.load_state_dict(self.state_dict())
         return agent_copy
+
+    def load_recent_model(self):
+        self.load_state_dict(SHIP_AGENT_STATE_DICT)
 
 
 from src.agent.board.board import HaliteBoard

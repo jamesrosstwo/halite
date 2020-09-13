@@ -30,4 +30,4 @@ learn:
     submission_model_dir: "submit"
 gym:
   version: 0.1
-mode: "submit"
+mode: "train"

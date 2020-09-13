@@ -8,6 +8,8 @@ from src.agent.learning.train.optimizer import optimize_model
 
 from typing import Dict, Any
 
+
+SETTINGS["mode"] = "train"
 ship_replay_memory = ReplayMemory(SETTINGS["learn"]["replay_memory_capacity"])
 shipyard_replay_memory = ReplayMemory(SETTINGS["learn"]["replay_memory_capacity"])
 
@@ -27,13 +29,14 @@ def train_agent(observation: Dict[str, Any], configuration: Dict[str, Any]) -> D
 print("Making environment")
 env = make("halite", debug=True)
 
-ship_agent = HaliteShipAgent().to(TORCH_DEVICE)
-shipyard_agent = HaliteShipyardAgent().to(TORCH_DEVICE)
 
-# ship_agent.load_recent_model()
-# shipyard_agent.load_recent_model()
 
 for i in range(SETTINGS["learn"]["num_train_episodes"]):
+    ship_agent = HaliteShipAgent().to(TORCH_DEVICE)
+    shipyard_agent = HaliteShipyardAgent().to(TORCH_DEVICE)
+
+    ship_agent.load_recent_model()
+    shipyard_agent.load_recent_model()
     print("Training step", i)
     print("Generating transition information")
     env.run([train_agent, "random", "random", "random"])

@@ -73,4 +73,4 @@ if __name__ == "__main__":
     submit_command = 'kaggle competitions submit -c halite -f ' + str(
         module_export_path) + ' -m "Deploy Script Submission"'
 
-    os.system(submit_command)
+    # os.system(submit_command)

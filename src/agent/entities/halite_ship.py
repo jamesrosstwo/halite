@@ -2,7 +2,7 @@
 from enum import Enum, auto
 from typing import Optional
 
-from src.board.board import pos_difference
+from src.agent.board.board import pos_difference
 
 from kaggle_environments.envs.halite.helpers import Ship, ShipAction, Point, ShipId, PlayerId, Board
 
@@ -13,6 +13,8 @@ SHIP_DIRECTIONS = (None, ShipAction.NORTH, ShipAction.EAST, ShipAction.SOUTH, Sh
 class HaliteShipState(Enum):
     COLLECT = auto()
     DEPOSIT = auto()
+    MOVE = auto()
+
 
 class HaliteShip(Ship):
     """
@@ -20,13 +22,24 @@ class HaliteShip(Ship):
     and performing ship actions
     """
 
-    def __init__(self, ship_id: ShipId, position: Point, halite: int, player_id: PlayerId, board: 'Board'):
+    def __init__(
+            self,
+            ship_id: ShipId,
+            position: Point,
+            halite: int,
+            player_id: PlayerId,
+            board: 'Board',
+            halite_board: 'HaliteBoard'
+    ):
+
         super().__init__(ship_id, position, halite, player_id, board)
         self.state = HaliteShipState.COLLECT
+        self._halite_board = halite_board
+        self._halite_player = halite_board.halite_players[player_id]
 
     @classmethod
-    def from_ship(cls, ship_obj: Ship):
-        return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board)
+    def from_ship(cls, ship_obj: Ship, halite_board: "HaliteBoard"):
+        return cls(ship_obj.id, ship_obj.position, ship_obj.halite, ship_obj.player_id, ship_obj._board, halite_board)
 
     def convert(self):
         self.next_action = ShipAction.CONVERT
@@ -69,5 +82,11 @@ class HaliteShip(Ship):
 
     @property
     def player(self):
-        from src.entities.player import HalitePlayer
-        return HalitePlayer.from_player(super().player)
+        return self._halite_player
+
+    @property
+    def board(self) -> "HaliteBoard":
+        return self._halite_board
+
+
+from src.agent.board.board import HaliteBoard

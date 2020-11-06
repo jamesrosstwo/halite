@@ -20,4 +20,10 @@ python submit.py
 ```
 
 The agent script will be compiled in the build directory specified in settings.yaml, and submitted your 
-[API Credentials](https://github.com/Kaggle/kaggle-api#api-credentials):
+[API Credentials](https://github.com/Kaggle/kaggle-api#api-credentials)
+
+
+## Gym
+OpenAI Gym environment to easily carry out reinforcement learning
+
+### Installation
